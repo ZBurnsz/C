@@ -2,7 +2,7 @@
 
 int main (void){
     int integer1;
-    int interger2;
+    int integer2;
     int sum;
 
 

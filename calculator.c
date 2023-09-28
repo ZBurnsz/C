@@ -37,10 +37,7 @@ case '/':
     result = num1 / num2;
     printf ("\nresult: %.2lf", result);
     break;
-
-
-
-    default:
+default:
         printf("%c is not a valid", operator);
 }
 

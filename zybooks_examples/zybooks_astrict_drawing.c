@@ -5,6 +5,7 @@ int main(void)
 
    int height;
 
+   printf("Enter the height--> ");
    scanf("%d", &height);
 
    for (int i = height; i >= 1; i--)

@@ -1,2 +1,2 @@
 
-int main()
+   scanf("%d", &height);

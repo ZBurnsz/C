@@ -11,27 +11,25 @@ int main(void) {
    printf("Enter %d integer values...\n", NUM_ELEMENTS);
 
    for (i = 0; i < NUM_ELEMENTS; ++i) {
-      printf("Value:"  );
+      printf("Value: "  );
       scanf("%d", &(userVals[i]));
+      sumVal = sumVal + userVals[i] - 1;
       printf("you entered: %d\t\nRunning sum is: %d\t\n", userVals[i], sumVal);
-      sumVal = 0;
-      sumVal = sumVal + userVals[i];
    }
 
 
 
 
-   // Determine sum
-   /*sumVal = 0;
+   sumVal = 0;
    for (i = 0; i < NUM_ELEMENTS; ++i) {
       sumVal = sumVal + userVals[i];
    }
-   */
+
    //average
    average = 0;
    average = sumVal / NUM_ELEMENTS;
 
-   printf("Sum: %d\nAverage: %d\n", sumVal, average);
+   printf("Sum: %d\nAverage: %d\n", sumVal - 1, average);
 
    return 0;
 }

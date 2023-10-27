@@ -1,28 +1,21 @@
 #include <stdio.h>
 #include <time.h>
 
+int main(void) {
+    double mag_size = 14.0;
+    clock_t start_time = clock();
 
+    for (int i = 0; i < 14; i++) {
+        double elapsed_time = (double)(clock() - start_time) / CLOCKS_PER_SEC;  // Calculate elapsed time in seconds
 
-
-int main (void){
-
-double mag_size[14];
-double time;
-
-printf ("Enter mag size: ");
-scanf("%lf",&mag_size);
-
-for (int i = 0; i < mag_size[0]; i++){
-    mag_size[i] = mag_size[i - 1];
-    time = clock();
-    while (clock() < time + 1000){
-        time = 3500;
-        continue;
+        if (elapsed_time >= 5.0) {
+            mag_size -= 1.0;
+            start_time = clock();
+            printf("mag_size: %.1lf\n", mag_size);
+        }
 
     }
 
-
-
-}
-return 0;
+    printf("mag_size reached 0.\n");
+    return 0;
 }

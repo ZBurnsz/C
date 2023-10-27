@@ -1,2 +1,2 @@
 
-   scanf("%d", &height);
+   char input [100];

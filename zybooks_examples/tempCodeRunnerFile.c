@@ -1,2 +1,2 @@
 
-   char input [100];
+        return 1;

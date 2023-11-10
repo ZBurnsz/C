@@ -24,21 +24,17 @@ for (int i = 0; i < n; i++){
     if (counts[i] == -1) continue; //already counted
 
 counts[i] = 1;
-for (int j = 0; j < n; j++ ){
+for (int j = 0; j < n ; j++ ){
     if (strcmp(words[i], words[j]) == 0){
-        counts[j] = counts[i];
-        counts[i]++;
+       counts[j] = counts[i];
+       counts[i]++;
 
 
     }
+}
+     printf("%s - %d\n", words[i], counts[i] - 1);
 
 }
-     printf("%s - %d\n", words[i], counts[i] );
-
-}
-
-
-
 
 
    return 0;

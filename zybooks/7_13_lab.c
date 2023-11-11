@@ -22,13 +22,10 @@ IntNode* GetNext(IntNode* thisNode) {
    return thisNode->nextNodePtr;
 }
 
-index = IndexOfIntNode(headNode, 22);
-printf("%d\n", index);
-
-index = IndexOfIntNode(headNode, 30);
-printf("%d\n", index);
-
-
+/* Insert node after this node.
+   Before: this -- next
+   After:  this -- node -- next
+*/
 void InsertAfter(IntNode* thisNode, IntNode* newNode) {
    IntNode* tempNext = NULL;
 
@@ -42,18 +39,16 @@ int IndexOf(IntNode* headNode, int target) {
 IntNode* currNode = headNode;
 int index = 0;
 
-while (currentNode !=NULL){
-    if (currNode->dataVal == target){
-        return index;
-    }
-    currNode = currNode->nextNodePtr;
-    index++;
+while (currNode !=NULL){
+    if(currNode-> dataVal == target){
+    return index - 1;
+}
+currNode = currNode->nextNodePtr;
+index++;
+
 }
 return -1;
-
-
 }
-
 int main() {
    IntNode* headNode;
    IntNode* currNode;

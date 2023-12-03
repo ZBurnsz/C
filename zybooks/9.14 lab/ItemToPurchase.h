@@ -7,7 +7,7 @@ struct ItemToPurchase {
     int itemQuantity;
 };
 
-void MakeItemBlank(struct ItemToPurchase item);
-void PrintItemCost(struct ItemToPurchase item);
+void MakeItemBlank(struct ItemToPurchase *item);
+void PrintItemCost(struct ItemToPurchase *item);
 
 #endif

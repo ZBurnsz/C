@@ -31,7 +31,7 @@ case '-':
     break;
 case '*':
     result = num1 * num2;
-    printf ("\nresult:o %.2lf", result);
+    printf ("\nresult: %.2lf", result);
     break;
 case '/':
     result = num1 / num2;

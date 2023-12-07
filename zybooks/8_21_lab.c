@@ -1,4 +1,3 @@
-<<<<<<< HEAD:zybooks_examples/8_21_lab.c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -64,4 +63,3 @@ int main(void) {
 
 	return 0;
 }
->>>>>>> e66920859c32bfbc62e063110ad2e5899547f9b8:zybooks/8_21_lab.c

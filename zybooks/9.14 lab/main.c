@@ -7,8 +7,7 @@ int main(void) {
     char buffer[100];
 
     // Initialize items
-    MakeItemBlank(&item1);
-    MakeItemBlank(&item2);
+  
 
     // Input for item 1
     printf("Item 1\n");
@@ -44,8 +43,8 @@ int main(void) {
 
     // Output
     printf("\nTOTAL COST\n");
-    PrintItemCost(&item1);
-    PrintItemCost(&item2);
+    PrintItemCost(item1);
+    PrintItemCost(item2);
 
     return 0;
 }

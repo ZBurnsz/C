@@ -1,5 +1,7 @@
 #include "headers.h"
 
+
+
 int coinTossGame(char player1[3], char player2[3], int *winner, int *numTosses) {
     // Check if player sequences are valid
     for (int i = 0; i < 3; ++i) {
@@ -12,21 +14,18 @@ int coinTossGame(char player1[3], char player2[3], int *winner, int *numTosses) 
         }
     }
 
-    // Initialize variables
     *winner = 0;
     *numTosses = 0;
 
-    // Simulate coin tosses until one of the players' sequences is encountered
-    while (1) {
-        int toss = rand() % 2;  // Simulate a single coin toss
+    // Simulate coin tosses and find the winner
+    while (*numTosses < 6) {
+        int toss = rand() % 2;  
 
-        // Check if the current toss matches player 1's sequence
         if (player1[*numTosses % 3] == (toss ? 'H' : 'T')) {
             *winner = 1;
             break;
         }
 
-        // Check if the current toss matches player 2's sequence
         if (player2[*numTosses % 3] == (toss ? 'H' : 'T')) {
             *winner = 2;
             break;
@@ -35,5 +34,5 @@ int coinTossGame(char player1[3], char player2[3], int *winner, int *numTosses) 
         (*numTosses)++;
     }
 
-    return 0;  // No errors
+    return 0;
 }

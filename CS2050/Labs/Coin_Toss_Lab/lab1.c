@@ -24,22 +24,16 @@ for (int i = 0; i < size;i++){
     if (array[i] > array[max]){
         int max = i;
     }
-}
-for (int i = 0; i < size; i++){
-    if (array[i] < array[min]){
+      if (array[i] < array[min]){
         int min = i;
     }
-    
-printf("%d, %d", max, min);
+}
 
 swap(max, min);
 
-printf("%d, %d", max, min);
-
 return 0; 
 }
-    
-}
+
 
 int lastChar(char str[], char *result){
 //this function will take a null terminated string and return the last character [*x[i] - 1] 
@@ -49,5 +43,8 @@ if (str[0]== '\0'){
 }
 
 
-
+for (int i = 0; i < str[i];i++){
+    *result = str[i - 1];
+}
+return 0;
 }

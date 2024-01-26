@@ -58,7 +58,10 @@
   "files.associations": {
     "stdio.h": "c",
     "limits": "c",
-    "headers.h": "c"
+    "headers.h": "c",
+    "stdlib.h": "c",
+    "__mutex_base": "c",
+    "variant": "c"
   },
   "C_Cpp_Runner.msvcSecureNoWarnings": false
 }

@@ -2,14 +2,22 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "cmake",
+      "request": "launch",
+      "name": "CMake: Configure project",
+      "cmakeDebugType": "configure",
+      "clean": false,
+      "configureAll": false
+    },
+    {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/Zach/OneDrive/Documents/GitHub/C",
-      "program": "c:/Users/Zach/OneDrive/Documents/GitHub/C/build/Debug/outDebug",
+      "cwd": "c:/Users/Zach/OneDrive/Documents/GitHub/C/CS2050/Labs/coin_toss",
+      "program": "c:/Users/Zach/OneDrive/Documents/GitHub/C/CS2050/Labs/coin_toss/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

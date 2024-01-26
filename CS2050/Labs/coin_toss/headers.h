@@ -9,8 +9,7 @@
 #define coin_toss_function_H
 
 
-int coinTossGame(char player1[3], char player2[3],
- int *winner, int *numTosses);
+int coinTossGame(char player1[3], char player2[3],int *winner, int *numTosses);
 
 
  #endif

@@ -1,49 +1,39 @@
 #include "headers.h"
 
-
 int coinTossGame(char player1[3], char player2[3], int *winner, int *numTosses) {
-    // Generate a sequence of 6 random H's and T's
-    int sequence[6];
-    for (int i = 0; i < 6; ++i) {
-        sequence[i] = rand() % 2;  // 0 or 1
-    }
-
-    // Print the sequence
-    printf("Sequence: ");
-    for (int i = 0; i < 6; ++i) {
-        printf("%c ", (sequence[i] == 1) ? 'H' : 'T');
-    }
-    printf("\n");
-
-    // Check for player 1 win
-    int player1Win = 1;
+    // Check if player sequences are valid
     for (int i = 0; i < 3; ++i) {
-        if (sequence[i] != player1[i]) {
-            player1Win = 0;
-            break;
+        if (player1[i] != 'H' && player1[i] != 'T') {
+            return 1;  // Error code 1: Invalid character in player 1's sequence
+        }
+
+        if (player2[i] != 'H' && player2[i] != 'T') {
+            return 2;  // Error code 2: Invalid character in player 2's sequence
         }
     }
 
-    // Check for player 2 win
-    int player2Win = 1;
-    for (int i = 0; i < 3; ++i) {
-        if (sequence[i] != player2[i]) {
-            player2Win = 0;
+    // Initialize variables
+    *winner = 0;
+    *numTosses = 0;
+
+    // Simulate coin tosses until one of the players' sequences is encountered
+    while (1) {
+        int toss = rand() % 2;  // Simulate a single coin toss
+
+        // Check if the current toss matches player 1's sequence
+        if (player1[*numTosses % 3] == (toss ? 'H' : 'T')) {
+            *winner = 1;
             break;
         }
+
+        // Check if the current toss matches player 2's sequence
+        if (player2[*numTosses % 3] == (toss ? 'H' : 'T')) {
+            *winner = 2;
+            break;
+        }
+
+        (*numTosses)++;
     }
 
-    // Determine the winner and update winner and numTosses
-    if (player1Win) {
-        *winner = 1;
-    } else if (player2Win) {
-        *winner = 2;
-    } else {
-        *winner = 0;
-    }
-
-    *numTosses = 6;
-
-    // Return 1 if there is a winner, 0 otherwise
-    return *winner != 0;
+    return 0;  // No errors
 }

@@ -1,53 +1,36 @@
 #include "headers.h"
 
 
-int main() {
-    // Seed for random number generation
-    srand(time(NULL));
 
-    // Player sequences
-    char player1Sequence[3] = {'H', 'H', 'T'};  // HHT
-    char player2Sequence[3] = {'T', 'H', 'H'};  // THH
+int main(void) {
+    srand((unsigned int)time(NULL));  // Seed the random number generator
 
-    // Variables for tracking wins
-    int player1Wins = 0;
-    int player2Wins = 0;
+    char aliceSequence[3] = {'H', 'H', 'T'};
+    char bobSequence[3] = {'T', 'H', 'H'};
 
-    // User input for the number of runs
-    int numRuns;
-    printf("Enter the number of runs: ");
-    scanf("%d", &numRuns);
+    int aliceWins = 0, bobWins = 0;
+    int numSimulations = 1000000;
 
-    // Loop for the specified number of runs
-    for (int run = 1; run <= numRuns; ++run) {
-        // Variables to store winner and number of tosses
-        int winner;
-        int numTosses;
+    for (int i = 0; i < numSimulations; ++i) {
+        int winner, numTosses;
+        int result = coinTossGame(aliceSequence, bobSequence, &winner, &numTosses);
 
-        // Run the coin toss game
-        int result = coinTossGame(player1Sequence, player2Sequence, &winner, &numTosses);
-
-        // Print the winner and update win counts
-        if (result) {
+        if (result == 0) {
             if (winner == 1) {
-                printf("Player 1 wins!\n");
-                player1Wins++;
-            } else if (winner == 2) {
-                printf("Player 2 wins!\n");
-                player2Wins++;
+                aliceWins++;
+            } else {
+                bobWins++;
             }
         } else {
-            printf("No winner. Running again.\n");
-            run--; // Run again without incrementing run
+            printf("Error in simulation %d: %d\n", i + 1, result);
         }
     }
 
-    // Calculate and print winning percentages
-    double player1WinPercentage = (double)player1Wins / numRuns * 100;
-    double player2WinPercentage = (double)player2Wins / numRuns * 100;
+    double aliceWinPercentage = (double)aliceWins / numSimulations * 100;
+    double bobWinPercentage = (double)bobWins / numSimulations * 100;
 
-    printf("\nPlayer 1 Win Percentage: %.2f%%\n", player1WinPercentage);
-    printf("Player 2 Win Percentage: %.2f%%\n", player2WinPercentage);
+    printf("Alice's win percentage: %.2f%%\n", aliceWinPercentage);
+    printf("Bob's win percentage: %.2f%%\n", bobWinPercentage);
 
     return 0;
 }

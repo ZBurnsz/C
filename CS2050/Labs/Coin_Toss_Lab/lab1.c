@@ -1,50 +1,41 @@
 #include "Lab1.h"
 
-
-
-void swap(int *a, int *b){
-//swap a and b values 
-
-int temp = *a;
-*a = *b; 
-*b = temp;  
-
-
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
 }
 
+int swapMaxMin(int array[], int size) {
+    
+    int max = 0;
+    int min = 0;
 
-
-
-int swapMaxMin(int array[], int size){
-//this will swap the minimum and maximum elements min != max if min == max return 1 otherwise 0 CALL THE SWAP FUNCTION TO DO THIS 
-int max = 0;
-int min = 0;
-
-for (int i = 0; i < size;i++){
-    if (array[i] > array[max]){
-        int max = i;
+    for (int i = 0; i < size; i++) {
+        if (array[i] > array[max]) {
+            max = i;
+        }
+        if (array[i] < array[min]) {
+            min = i;
+        }
     }
-      if (array[i] < array[min]){
-        int min = i;
+
+    swap(&array[min], &array[max]); 
+
+    return 0;
+}
+
+int lastChar(char str[], char *result) {
+
+    if (str[0] == '\0') {
+        return 1;
     }
-}
 
-swap(max, min);
+    int i = 0;
+    while (str[i] != '\0') {
+        *result = str[i];
+        i++;
+    }
 
-return 0; 
-}
-
-
-int lastChar(char str[], char *result){
-//this function will take a null terminated string and return the last character [*x[i] - 1] 
-//if empty return 1 otherwise return 0; 
-if (str[0]== '\0'){
-    return 1;
-}
-
-
-for (int i = 0; i < str[i];i++){
-    *result = str[i - 1];
-}
-return 0;
+    return 0;
 }

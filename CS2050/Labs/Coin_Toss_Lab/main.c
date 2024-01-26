@@ -1,46 +1,25 @@
 #include "Lab1.h"
 
+int main(void) {
 
+    int array[] = {7, 5, 1};
 
+   swapMaxMin(array, 3);
 
-//no strlen or strcmp 
-
-void swap(int *a, int *b);
-int swapMaxMin(int array[], int size);
-int lastChar(char str[], char *result);
-
-
-int main (void){
-
-    int array[] = {7,5,1};
-
-    int swappedResults = swapMaxMin(array, 3);
-
-    printf("Swapped results = %d, %d,",array[0], array[1], array[2]);
-
+    printf("Swapped results = %d, %d, %d\n", array[0], array[1], array[2]);
 
 
     char stringInput[] = "Wow";
-    char result; 
-
-    char stringOutput = lastChar(stringInput, &result );
-
-    printf("Last character = %c", stringOutput);
+    char result;
 
 
+
+    int stringOutput = lastChar(stringInput, &result);
 
 
 
 
+    printf("Last character = %c\n", result);
 
-
-
-
-
-
-
-
-
-
-return 0;
+    return 0;
 }

@@ -16,8 +16,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/Zach/OneDrive/Documents/GitHub/C/CS2050/Labs/coin_toss",
-      "program": "c:/Users/Zach/OneDrive/Documents/GitHub/C/CS2050/Labs/coin_toss/build/Debug/outDebug",
+      "cwd": "c:/Users/Zach/OneDrive/Documents/GitHub/C",
+      "program": "c:/Users/Zach/OneDrive/Documents/GitHub/C/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

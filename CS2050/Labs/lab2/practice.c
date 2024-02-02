@@ -114,3 +114,33 @@ int getSumOfMinMax() {
     extern int *arr; // External reference to the array
     return *(arr - 2); // Return the sum of min and max stored before the array
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

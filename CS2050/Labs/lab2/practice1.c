@@ -1,90 +1,82 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Function to create a new integer array
-int makeArray(int** array, int size) {
-    // Check if the array pointer is NULL
-    if (array == NULL) {
-        return 1; // Return 1 for failure
+int *makeArray(int size) {
+    int *newArray = (int *)malloc(size * sizeof(int));
+    if (newArray != NULL) {
+        for (int i = 0; i < size; i++) {
+            newArray[i] = 0;
+        }
     }
-
-    // Allocate memory for the new array
-    *array = (int*)malloc(size * sizeof(int));
-
-    // Check if memory allocation was successful
-    if (*array == NULL) {
-        return 1; // Return 1 for failure
-    }
-
-    return 0; // Return 0 for success
+    return newArray;
 }
 
-// Function to initialize each index in the array to 0
-void initArray(int* array, int size) {
-    // Check if the array pointer is NULL
-    if (array == NULL) {
-        return;
-    }
-
-    // Initialize each index to 0
+int *addressOf(int *array, int size, int element) {
     for (int i = 0; i < size; i++) {
-        array[i] = 0;
+        if (array[i] == element) {
+            return &array[i];
+        }
     }
+    return NULL; // Element not found
 }
 
-// Function to multiply odd elements of the array by a multiplicand
-int multiplyOdd(int* array, int size, int multiplicand) {
-    // Check if the array pointer is NULL
-    if (array == NULL) {
-        return 0;
-    }
+int sliceArray(int *array, int size, int begin, int end, int **result) {
+    int beginIndex = -1;
+    int endIndex = -1;
 
-    int count = 0; // Counter for the number of elements multiplied
-
-    // Multiply odd elements by the multiplicand
+    // Find the indices of begin and end elements
     for (int i = 0; i < size; i++) {
-        if (array[i] % 2 != 0) { // Check if the element is odd
-            array[i] *= multiplicand;
-            count++;
+        if (array[i] == begin) {
+            beginIndex = i;
+        }
+        if (array[i] == end) {
+            endIndex = i; 
         }
     }
 
-    return count; // Return the number of elements multiplied
-}
-
-// Function to free memory allocated to the array
-void freeArray(int** array) {
-    // Check if the array pointer is NULL
-    if (array == NULL || *array == NULL) {
-        return;
+    // If either element is not found, return -1
+    if (beginIndex == -1 || endIndex == -1) {
+        return -1;
     }
 
-    // Free the allocated memory
-    free(*array);
+    // Update the result pointer to point to the start of the new array
+    *result = &array[beginIndex];
 
-    // Set the original pointer to NULL
+    // Return the size of the new array minus 1
+    return endIndex - 1;
+}
+
+void freeArray(int **array) {
+    free(*array);
     *array = NULL;
 }
 
 int main() {
-    // Example usage
-    int* myArray = NULL;
-    int size = 5;
+    int array[] = {2, 9, 4, 3, 0, 7, 1};
+    int size = sizeof(array) / sizeof(array[0]);
 
-    // Create array
-    if (makeArray(&myArray, size) == 0) {
-        // Initialize array
-        initArray(myArray, size);
+    int *newArray = makeArray(size);
 
-        // Multiply odd elements by 3
-        int count = multiplyOdd(myArray, size, 3);
-        printf("Number of elements multiplied: %d\n", count);
-
-        // Free allocated memory
-        freeArray(&myArray);
+    int *address = addressOf(array, size, 4);
+    if (address != NULL) {
+        printf("Address of element 4: %p\n", (void *)address);
     } else {
-        printf("Failed to allocate memory for the array.\n");
+        printf("Element 4 not found in the array\n");
     }
+
+    int *result;
+    int newSize = sliceArray(array, size, 9, 0, &result);
+    if (newSize != -1) {
+        printf("Sliced array: ");
+        for (int i = 0; i < newSize + 1; i++) {
+            printf("%d ", result[i]);
+        }
+        printf("\n");
+    } else {
+        printf("Slice operation failed\n");
+    }
+
+    freeArray(&newArray);
 
     return 0;
 }

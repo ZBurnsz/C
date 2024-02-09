@@ -8,7 +8,7 @@ this function takes an int size and makess / initilizes an array of that size
 int * makeArray(int size){
 
 // give memory based on the size entered 
-int *array = (int)malloc(size * sizeof(int));
+int *array = malloc(sizeof(int)*size);
 
 //if array works loop through and make all elements 0
 if (array != NULL){
@@ -23,7 +23,7 @@ if (array == NULL){
 
 }
 
-return *array; 
+return array; 
 }
 
 /*
@@ -33,7 +33,6 @@ through the array and prints the address of the element inside the array if foun
 */
 int * addressOf(int *array, int size, int element){
 // loop through element and find if an element inside the array == element intered in the qurry and return that element address
-
 
 for (int i = 0; i < size; i++){
     if (array[i] == element); 
@@ -53,8 +52,8 @@ int sliceArray(int *array, int size, int begin, int end, int **result){
 //point to the start of the new array with the begin and end elements 
 //if either boundary element isnt found return -1 
 
-int begin_index = -1; 
-int end_index = -1; 
+int begin_index = -1; //instead of -1 -->addressOf(array, size, begin);
+int end_index = -1;  //instead of -1 --> addressOf(array, size, end);
 
 for (int i = 0; i < size; i++){
     if (array[i] == begin){

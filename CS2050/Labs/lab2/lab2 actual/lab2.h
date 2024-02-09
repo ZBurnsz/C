@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-
 int * makeArray(int size);
 
 int * addressOf(int *array, int size, int element);

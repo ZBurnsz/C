@@ -38,6 +38,7 @@ int takeShot(int *board, int cell){
 if (board[cell] == 1){
     board[cell] = -1;
     board[BOARD_SIZE + 1]++; //increment the value for the hidden shots taken. 
+    board[BOARD_SIZE + 2]++; //increment the # of successful hits. 
     updateScore(board);
 
     return 1;
@@ -84,11 +85,13 @@ This function takes the board parameter and returns the number of successeful hi
 */
 int getHits(int *board){
 
-for (int i = 0; i < BOARD_SIZE; i++){
+/* for (int i = 0; i < BOARD_SIZE; i++){
     if(board[i] == -1){
         board[BOARD_SIZE + 2]++;
     }
 }
+*/
+// im doing this in the takeShot function. ^^
 return board[BOARD_SIZE + 2];
 
 

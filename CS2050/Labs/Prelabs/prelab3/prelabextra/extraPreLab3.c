@@ -16,7 +16,6 @@ double *createDoubleArray(int minIndex, int maxIndex, FILE *fp) {
         fscanf(fp, "%lf", &array[i]);
     }
 
-    // Return a pointer to the adjusted array
     return array;
 }
 
@@ -35,15 +34,12 @@ int main() {
     // Create the double array for indices from 1 to 10
     double *weights = createDoubleArray(1, 10, fp);
 
-    // Close the file
     fclose(fp);
 
-    // Print the weights
     for (int i = 1; i <= 10; i++) {
         printf("Weight for index %d: %.2lf\n", i, weights[i]);
     }
 
-    // Free the allocated memory
     freeDoubleArray(weights, 1);
 
     return EXIT_SUCCESS;

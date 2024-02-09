@@ -2,28 +2,14 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "cmake",
-      "request": "launch",
-      "name": "CMake: Configure project",
-      "cmakeDebugType": "configure",
-      "clean": false,
-      "configureAll": false
-    },
-    {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
-<<<<<<< HEAD
-      "externalConsole": false,
-      "cwd": "/Users/zacharyburns/Documents/GitHub/C",
-      "program": "/Users/zacharyburns/Documents/GitHub/C/build/Debug/outDebug",
-=======
       "externalConsole": true,
       "cwd": "c:/Users/Zach/OneDrive/Documents/GitHub/C",
       "program": "c:/Users/Zach/OneDrive/Documents/GitHub/C/build/Debug/outDebug",
->>>>>>> 12be7fdb5e4d236a7930c4e38504a898b2d4062a
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

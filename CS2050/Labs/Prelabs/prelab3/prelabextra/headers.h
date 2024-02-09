@@ -9,4 +9,4 @@ is the index of the last element of the array. The function:
 void freeDoubleArray(double * array, int minIndex) must be
 called to free the allocated array.
 */
-double * createDoubleArray(int minIndex, int maxIndex);
+double *createDoubleArray(int minIndex, int maxIndex, FILE *fp);

@@ -21,13 +21,12 @@ double *createDoubleArray(int minIndex, int maxIndex, FILE *fp) {
 }
 
 void freeDoubleArray(double *array, int minIndex) {
-    // Free the allocated memory
     free(array + minIndex);
 }
 
 int main() {
     // Open the file for reading
-    FILE *fp = fopen("data.txt", "w");
+    FILE *fp = fopen("data.txt", "r");
     if (fp == NULL) {
         perror("Error opening file");
         return EXIT_FAILURE;

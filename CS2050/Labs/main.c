@@ -1,21 +1,23 @@
 #include "lab3.h"
+
 int main() {
-    // Create a new game board
-    int *board = newBoard();
+    // Declare an array to represent the game board
+    int board[BOARD_SIZE];
 
-    // Take some shots
-    takeShot(board, 3); // Hit
-    takeShot(board, 5); // Miss
-    takeShot(board, 7); // Hit
+    // Initialize the game board
+    for (int i = 0; i < BOARD_SIZE; i++) {
+        board[i] = 0; // 0 represents an empty cell
+    }
 
-    // Print game statistics
-    printf("Shots taken: %d\n", getShotsTaken(board));
-    printf("Successful hits: %d\n", getHits(board));
-    printf("Remaining ships: %d\n", countRemainingShips(board));
-    printf("Score: %.2f\n", getScore(board));
+    // Example: Place a ship at position 3
+    board[3] = 1; // 1 represents a ship
 
-    // End the game and free memory
-    endGame(board);
+    // Print the game board
+    printf("Game Board:\n");
+    for (int i = 0; i < BOARD_SIZE; i++) {
+        printf("%d ", board[i]);
+    }
+    printf("\n");
 
     return 0;
 }

@@ -109,10 +109,10 @@ this function takes the board parameter and returns the updated score based on s
 */
 void updateScore(int *board){
 
-int shots = getShotsTaken(board);
+float shots = getShotsTaken(board);
 int hits = getHits (board);
  
-int score = shots / hits; 
+float score = shots / hits; 
 board [BOARD_SIZE + 4] = score; 
 
 
@@ -127,3 +127,4 @@ board = NULL;
 
     
 }
+

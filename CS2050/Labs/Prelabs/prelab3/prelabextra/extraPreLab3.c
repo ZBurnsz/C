@@ -30,9 +30,19 @@ int main() {
         perror("Error opening file");
         return EXIT_FAILURE;
     }
+    //input for file min and max 
+    int min, max; 
+    char min_str[100], max_str[100]; 
 
-    // Create the double array for indices from 1 to 10
-    double *weights = createDoubleArray(1, 10, fp);
+    printf("Enter min number: ");
+    fgets(min_str, sizeof(min_str), stdin); 
+    min = atoi(min_str); 
+    //atoi = ASCII to integer string -> int 
+    printf("Enter max number: ");
+    fgets(max_str, sizeof(max_str), stdin); 6 
+    max = atoi(max_str);
+
+    double *weights = createDoubleArray(min, max, fp);
 
     fclose(fp);
 

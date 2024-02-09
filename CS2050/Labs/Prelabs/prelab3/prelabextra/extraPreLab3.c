@@ -39,7 +39,7 @@ int main() {
     min = atoi(min_str); 
     //atoi = ASCII to integer string -> int 
     printf("Enter max number: ");
-    fgets(max_str, sizeof(max_str), stdin); 6 
+    fgets(max_str, sizeof(max_str), stdin); 
     max = atoi(max_str);
 
     double *weights = createDoubleArray(min, max, fp);

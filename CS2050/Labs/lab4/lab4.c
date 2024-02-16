@@ -17,7 +17,7 @@ for (int i = 0; i < BOARD_SIZE; ++i){
     board->arena[i] = 0;
 }
 }
-return board; 
+return board;
 
 
 }
@@ -45,7 +45,7 @@ return 0;
 
 /*countRemainingShips:
 this function takes the game board and counts the number of remaining 1's 
-then returns that number giving you the number of ships left 
+then returns that number giving you the number of ships left.
 */
 int countRemainingShips(GameBoard *board){
 int count = 0;

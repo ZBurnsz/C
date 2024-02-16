@@ -1,6 +1,11 @@
 #include "lab4.h"
 //used sources from my lab3 ship game and CS2050 slides on structures. 
-
+typedef struct {
+    int shots;
+    int hits;
+    float score;
+    int arena[BOARD_SIZE];
+} GameBoard;
 
 /*GameBoard: 
 This function creates a new board using an array */
@@ -25,17 +30,16 @@ this function takes the gameboard as a paramater and a cell then compares that c
 int takeShot(GameBoard *board, int cell){
 
 if (board ->arena[cell] == 1 ){
-
     board->arena[cell] == -1;
     board->hits++;
     board->shots++;
-    board -> score = (float)board->shots / board->hits; //change 
+    board -> score = (float)board->hits / board->shots; //change 
     return 1; 
 
 } else if(board -> arena[cell] == -1 || 0){
 
     board -> shots++;
-    board -> score = (float) board ->shots / board->hits; //change 
+    board -> score = (float) board ->hits / board->shots; //change 
     return 0; 
 
 }

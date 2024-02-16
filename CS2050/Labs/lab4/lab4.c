@@ -8,7 +8,10 @@ GameBoard * newBoard(){
 
 //memory 
 GameBoard *board = (GameBoard *)malloc (sizeof(GameBoard));
-
+if (board != NULL){
+    board -> hits = 0; 
+    board -> shots = 0; 
+    board -> score = 0; 
 //initialize board to 0 
 for (int i = 0; i < BOARD_SIZE; ++i){
     board->arena[i] = 0;
@@ -37,10 +40,6 @@ if (board ->arena[cell] == 1 ){
     }
 return 0; 
    
-
-}
-
-
 
 }
 

@@ -34,7 +34,7 @@ if (board ->arena[cell] == 1 ){
     board->shots++;
     board -> score = (float)board->hits / board->shots; //change 
     return 1; 
-}else if (board->arena[cell] == -1 || board->arena[cell] == 0) {
+}else if (board->arena[cell] == 0) {
     board -> shots++;
     board -> score = (float) board ->hits / board->shots; //change 
     }

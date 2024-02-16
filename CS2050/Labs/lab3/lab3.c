@@ -9,13 +9,13 @@ int * newBoard(){
 // and the score (float) = hits / shots 
 // empty cell = 0, ship = 1, destroyed ship = -1
 
-int *board = malloc((BOARD_SIZE) * sizeof(int));
+int *board = malloc((BOARD_SIZE + 4) * sizeof(int));
 //initialize to 0; 
 
 for (int i = 0; i < BOARD_SIZE; i++){
     board[i] = 0; 
 }
-
+//placing hidden values 
 board [BOARD_SIZE + 1] = 0;     //get shots taken  
 board [BOARD_SIZE + 2] = 0; //get hits 
 board [BOARD_SIZE + 3] = 0; //get score 

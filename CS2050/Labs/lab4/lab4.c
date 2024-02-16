@@ -121,17 +121,3 @@ board = NULL;
 
 }
 
-int main() {
-    // Example usage
-    GameBoard *board = newBoard();
-    placeShip(board, 5);
-    placeShip(board, 10);
-    takeShot(board, 5);
-    takeShot(board, 6);
-    printf("Remaining ships: %d\n", countRemainingShips(board));
-    printf("Shots taken: %d\n", getShotsTaken(board));
-    printf("Hits: %d\n", getHits(board));
-    printf("Score: %.2f\n", getScore(board));
-    endGame(board);
-    return 0;
-}

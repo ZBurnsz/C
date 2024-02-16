@@ -2,15 +2,21 @@
 
 
 int main() {
-    FILE *file = fopen("float_values.txt", "w+");
+    FILE *file = fopen("float_values.txt", "r");
     if (file == NULL) {
         fprintf(stderr, "Error: Could not open the file.\n");
         return 1;
     }
 
+
+  
+
     int length;
     float *floatArray = readFloatFileIntoArray(file, &length);
-
+    for (int i = 0; i < length; ++i){
+        printf("%f\n", floatArray[i]);
+        
+    }
     if (floatArray != NULL) {
         // Process the float array as needed
 

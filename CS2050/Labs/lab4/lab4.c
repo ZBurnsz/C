@@ -1,11 +1,6 @@
 #include "lab4.h"
 //used sources from my lab3 ship game and CS2050 slides on structures. 
-typedef struct {
-    int shots;
-    int hits;
-    float score;
-    int arena[BOARD_SIZE];
-} GameBoard;
+
 
 /*GameBoard: 
 This function creates a new board using an array */
@@ -13,10 +8,14 @@ GameBoard * newBoard(){
 
 //memory 
 GameBoard *board = (GameBoard *)malloc (sizeof(GameBoard));
-
+if (board != NULL){
+    board ->hits = 0; 
+    board ->shots = 0; 
+    board ->score = 0; 
 //initialize board to 0 
 for (int i = 0; i < BOARD_SIZE; ++i){
     board->arena[i] = 0;
+}
 }
 return board; 
 
@@ -28,6 +27,10 @@ this function takes the gameboard as a paramater and a cell then compares that c
 1 or 0 depending on if a ship is hit or not and returns that value 1 or 0 if hit or miss 
 */
 int takeShot(GameBoard *board, int cell){
+    //chech if outside of bounds 
+if (cell < 0 || cell >= BOARD_SIZE){
+    return 0; 
+}
 
 if (board ->arena[cell] == 1 ){
     board->arena[cell] == -1;
@@ -43,9 +46,6 @@ if (board ->arena[cell] == 1 ){
     return 0; 
 
 }
-
-
-
 }
 
 /*countRemainingShips:
@@ -98,16 +98,14 @@ this function takes the board and a cell input then places a ship in that cell u
 */
 int placeShip(GameBoard *board, int cell){
 // check if 1 or -1 if those then == 1 if not the change 0 -> 1
+//check if outside of bounds 
 
 if (cell < 0 || cell > BOARD_SIZE){
     return 3; 
 }
-
 if (board -> arena[cell] == 1 || -1){
     return 2; 
 }
-
-
 if (board -> arena[cell] == 0){
     board -> arena[cell] = 1;
     return 1;

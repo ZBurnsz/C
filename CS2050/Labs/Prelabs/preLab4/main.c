@@ -1,96 +1,35 @@
 #include "headers.h"
 
-typedef struct {
-    int empID, jobID; 
-    char *name; 
-    float salary;
-}Employee;
 
 
-Employee * reachEmployeeArray(FILE *ptr){
-
-Employee *empArray; 
-
-empArray = (Employee *)malloc(sizeof(Employee));
-
-if(empArray == NULL){
-    printf("Memory allocation failed\n");
-    exit(1);
-}
 
 
-int *length;
-
-//open check for length 
-ptr = fopen("employee.txt", "r");
-if (fscanf(ptr, "%d", length) == 0 || *length <= 0) {
-        fprintf(stderr, "Error: Invalid or missing length in the file.\n");
-        return NULL;
+int main() {
+    FILE *fp = fopen("employees.txt", "w");
+    if (fp == NULL) {
+        fprintf(stderr, "Error: Unable to open file.\n");
+        return 1;
     }
 
-//open allocate memory for the float array
-float *floatArray = (float *)malloc(*length * sizeof(float));
-    if (floatArray == NULL) {
-        fprintf(stderr, "Error: Memory allocation failed.\n");
-        return NULL;
+    // Read employee array from file
+    Employee *employees = readEmployeeArray(fp);
+
+    // Example usage: Retrieve employee by ID
+    int empID_to_search = 123;
+    Employee *emp = getEmployeeByID(employees, empID_to_search);
+    if (emp != NULL) {
+        printf("Employee found: ID %d, Salary %.2f, Job Type %d\n", emp->empID, emp->salary);
+    } else {
+        printf("Employee with ID %d not found.\n", empID_to_search);
     }
 
-// NEED TO CHANGE TO READ FROM A STRUCTURE
-    for (int i = 0; i < *length; ++i) {
-        if (fscanf(ptr, "%f", &floatArray[i]) != 1) {
-            fprintf(stderr, "Error: Failed to read float values from the file.\n");
-            free(floatArray);
-            return NULL;
-        }
-    }
-    return floatArray;
-    return length;
+    
+ 
+
+
+    // Free allocated memory
+    free(employees);
+    fclose(fp);
+
+    return 0;
 }
-
-Employee * getEmployeeByID(Employee *, int empID){
-
-    if (empID == empArray->empID)
-
-    for (int i = 0; i < *length; ++i) {
-        if (empArray[i].empID == empID){
-            return &empArray[i];
-        }
-    }
-    else{
-        printf("Employee not found\n");
-        return NULL;
-    }
-
-}
-
-
-
-
-int setEmpSalary(Employee *, int empID, float salary){
-
-
-
-
-
-
-}
-int getEmpSalary(Employee *, int empID, float *salary){
-
-
-
-
-}
-int setEmpJobType(Employee *, int empID, int job){
-
-
-
-
-}
-int getEmpJobType(Employee *, int empID, int *job){
-
-
-
-
-
-}
-

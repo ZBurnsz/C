@@ -2,20 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 typedef struct {
     int empID, jobID; 
     char *name; 
     float salary;
 }Employee;
 
-Employee * reachEmployeeArray(FILE *ptr);
-
-Employee * getEmployeeByID(Employee *, int empID);
-
-
-
-int setEmpSalary(Employee *, int empID, float salary);
-int getEmpSalary(Employee *, int empID, float *salary);
-int setEmpJobType(Employee *, int empID, int job);
-int getEmpJobType(Employee *, int empID, int *job);
+Employee *readEmployeeArray(FILE *fp);
+Employee *getEmployeeByID(Employee *employees, int empID);
+int setEmpSalary(Employee *employees, int empID, float salary);
+int getEmpSalary(Employee *employees, int empID, float *salary);
+int setEmpJobType(Employee *employees, int empID, int job);
+int getEmpJobType(Employee *employees, int empID, int *job);
 

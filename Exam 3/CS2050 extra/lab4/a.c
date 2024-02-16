@@ -1,6 +1,7 @@
+#include <stdio.h>
 #include <stdlib.h>
 
-#define BOARD_SIZE 100 // Example size, adjust as needed
+#define BOARD_SIZE 32 // Example size, adjust as needed
 
 typedef struct {
     int shots;
@@ -73,4 +74,19 @@ int placeShip(GameBoard *board, int cell) {
 
 void endGame(GameBoard *board) {
     free(board);
+}
+
+int main() {
+    // Example usage
+    GameBoard *board = newBoard();
+    placeShip(board, 5);
+    placeShip(board, 10);
+    takeShot(board, 5);
+    takeShot(board, 6);
+    printf("Remaining ships: %d\n", countRemainingShips(board));
+    printf("Shots taken: %d\n", getShotsTaken(board));
+    printf("Hits: %d\n", getHits(board));
+    printf("Score: %.2f\n", getScore(board));
+    endGame(board);
+    return 0;
 }

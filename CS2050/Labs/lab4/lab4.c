@@ -8,10 +8,7 @@ GameBoard * newBoard(){
 
 //memory 
 GameBoard *board = (GameBoard *)malloc (sizeof(GameBoard));
-if (board != NULL){
-    board ->hits = 0; 
-    board ->shots = 0; 
-    board ->score = 0; 
+
 //initialize board to 0 
 for (int i = 0; i < BOARD_SIZE; ++i){
     board->arena[i] = 0;
@@ -27,25 +24,24 @@ this function takes the gameboard as a paramater and a cell then compares that c
 1 or 0 depending on if a ship is hit or not and returns that value 1 or 0 if hit or miss 
 */
 int takeShot(GameBoard *board, int cell){
-    //chech if outside of bounds 
-if (cell < 0 || cell >= BOARD_SIZE){
-    return 0; 
-}
 
 if (board ->arena[cell] == 1 ){
-    board->arena[cell] == -1;
+    board->arena[cell] = -1;
     board->hits++;
     board->shots++;
     board -> score = (float)board->hits / board->shots; //change 
     return 1; 
-
-} else if(board -> arena[cell] == -1 || 0){
-
+}else if (board->arena[cell] == -1 || board->arena[cell] == 0) {
     board -> shots++;
     board -> score = (float) board ->hits / board->shots; //change 
-    return 0; 
+    }
+return 0; 
+   
 
 }
+
+
+
 }
 
 /*countRemainingShips:
@@ -100,11 +96,11 @@ int placeShip(GameBoard *board, int cell){
 // check if 1 or -1 if those then == 1 if not the change 0 -> 1
 //check if outside of bounds 
 
-if (cell < 0 || cell > BOARD_SIZE){
-    return 3; 
+if (cell < 0 || cell >= BOARD_SIZE){
+    return 0; 
 }
 if (board -> arena[cell] == 1 || -1){
-    return 2; 
+    return 0; 
 }
 if (board -> arena[cell] == 0){
     board -> arena[cell] = 1;
@@ -124,4 +120,19 @@ board = NULL;
 
 
 
+}
+
+int main() {
+    // Example usage
+    GameBoard *board = newBoard();
+    placeShip(board, 5);
+    placeShip(board, 10);
+    takeShot(board, 5);
+    takeShot(board, 6);
+    printf("Remaining ships: %d\n", countRemainingShips(board));
+    printf("Shots taken: %d\n", getShotsTaken(board));
+    printf("Hits: %d\n", getHits(board));
+    printf("Score: %.2f\n", getScore(board));
+    endGame(board);
+    return 0;
 }

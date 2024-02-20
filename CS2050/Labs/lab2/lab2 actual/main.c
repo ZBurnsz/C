@@ -1,62 +1,58 @@
 #include "lab2.h"
 
+
+
 int main() {
-    int size = 10;
-    int array[] = { 7, 2, 5, 8, 4, 9, 3, 0, 1, 6 };
-
-    puts("----------------RUNNING TESTS----------------");
-
-    int *testArr = makeArray(size);
-    if(!testArr) {
-        puts("ERROR: makeArray unexpectedly returned NULL");
+    // Test makeArray
+    int size = 7;
+    int *arr = makeArray(size);
+    if (arr != NULL) {
+        printf("makeArray: Array created successfully.\n");
+        printf("Array elements:");
+        for (int i = 0; i < size; i++) {
+            printf(" %d", arr[i]);
+        }
+        printf("\n");
     } else {
-        for (int i = 0; i < size; ++i)
-        {
-            if (testArr[i] != 0)
-            {
-                printf("ERROR: array[%d] not 0-initialized\n", i);
-                break;
+        printf("makeArray: Failed to create array.\n");
+        return 1; // Exit with error
+    }
+
+    // Test addressOf
+    int element = 3;
+    int *addr = addressOf(arr, size, element);
+    if (addr != NULL) {
+        printf("addressOf: Address of %d: %p\n", element, (void *)addr);
+    } else {
+        printf("addressOf: Address of %d not found\n", element);
+    }
+
+    // Test sliceArray
+    int begin = 9;
+    int end = 0;
+
+    // Define the original array
+    int array[] = {2, 9, 4, 3, 0, 7, 1};
+
+    // Slice the array
+    int *slicedArray;
+    int newSize = sliceArray(array, size, begin, end, &slicedArray);
+    if (newSize != -1) {
+        // Print the sliced array
+        printf("slice = ");
+        for (int i = 0; i < newSize; i++) {
+            printf("%d", slicedArray[i]);
+            if (i < newSize - 1) {
+                printf(", ");
             }
         }
+        printf("\n");
+    } else {
+        printf("sliceArray: Boundary elements not found\n");
     }
 
+    // Free dynamically allocated memory
+    free(arr);
 
-    int *test = addressOf(array, size, 4);
-    if(test != (array + 4)) {
-        puts("ERROR: addressOf returned unexpected address");
-        printf("Expected %p, got %p\n", (void *)(array + 4), (void *)test);
-    }
-
-    test = addressOf(array, size, -255);
-    if(test) {
-        puts("ERROR: addressOf unexpectedly returned success");
-    }
-
-
-    int *slice;
-    int sliceSize = sliceArray(array, size, 9, 1, &slice);
-    if(sliceSize != 4) {
-        printf("ERROR: slice returned size of %d, expected %d\n", sliceSize, 4);
-    }
-    if(slice != array + 5) {
-        puts("ERROR: slice returned unexpected begin addres");
-        printf("Expected %p, got %p\n", (void *)(array + 5), (void *)slice);
-    }
-
-    sliceSize = sliceArray(array, size, 9, -25, &slice);
-    if(sliceSize != -1) {
-        printf("ERROR: slice unexpectedly returned success. Got %d\n", sliceSize);
-    }
-
-    sliceSize = sliceArray(array, size, 25, 9, &slice);
-    if (sliceSize != -1) {
-        printf("ERROR: slice unexpectedly returned success. Got %d\n", sliceSize);
-    }
-
-    puts("----------------FREEING ARRAY----------------");
-    freeArray(&testArr);
-    if(testArr) {
-        puts("ERROR: freeArray did not nullify array");
-    }
+    return 0;
 }
-

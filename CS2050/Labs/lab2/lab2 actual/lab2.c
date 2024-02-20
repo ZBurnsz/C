@@ -19,7 +19,7 @@ if (array != NULL){
 //if array doesnt work, return 1 and print the statement 6
 if (array == NULL){
     printf("cannot allocate array");
-    return 1; 
+    return NULL ; //fixed **
 
 }
 
@@ -39,6 +39,8 @@ for (int i = 0; i < size; i++){
     return &array[i];
 }
 
+
+return NULL;
 }
 
 /*
@@ -57,24 +59,30 @@ int end_index = -1;  //instead of -1 --> addressOf(array, size, end);
 
 for (int i = 0; i < size; i++){
     if (array[i] == begin){
-        begin_index == &array[i];
+        begin_index = i;
     }
     if (array[i] == end){
-         end_index == &array[i];
+         end_index = i;
 
     }
     }
 
 //if begin or end isnt found return -1 
-if (begin_index == -1 || end_index == -1){
-    return -1; 
-}
-//return new array address
-*result == &array[begin_index];
+if (begin_index == -1 || end_index == -1) {
+        return -1;
+    }
+    
+    // Calculate the size of the sliced array
+    int newSize = end_index - begin_index + 1;   
 
-return end_index - 1; 
+    // Allocate memory for the new sliced array
+    *result = malloc(sizeof(int) * newSize);  //added 
 
 
+    //copy new array elements to new array
+    for (int i = 0; i < newSize; i++) {  //added
+        (*result)[i] = array[begin_index + i];
+    }
 }
 
 
@@ -84,8 +92,8 @@ this function takes an arrays's memory address and frees the memory of that arra
 */
 void freeArray(int **array){
 
-free(**array);
-*array == NULL; 
+free(*array);  //removed extra * 
+*array = NULL; // changed from *array == NULL 
 
 
 }

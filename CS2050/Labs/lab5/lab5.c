@@ -19,7 +19,6 @@ this function returns a pointer to the new array or NULL if failure.
 VendingMachine * newMachine(int numSlots){
 
 VendingMachine *vm = (VendingMachine *)malloc(sizeof(VendingMachine));
-
 if (vm == NULL){
     return NULL; 
 }
@@ -35,9 +34,6 @@ vm -> numSlots = numSlots;
 //set all values to 0; 
 for (int i = 0; i < numSlots; i++){ 
 vm->slots[i].ID = 0;
-vm->slots[i].stock = 0; 
-vm->slots[i].maxStock = 0; 
-vm->slots[i].price = 0.0; 
 }
 
 
@@ -55,15 +51,11 @@ int addStockItem(VendingMachine *vm, StockItem item){
 for (int i = 0; i < vm -> numSlots; i++){
     if(vm->slots[i].ID == 0){
         vm -> slots[i] = item; 
-        vm -> slots[i].ID = 1; 
+        //vm -> slots[i].ID = 1; 
         return 1; 
-    } 
-    
-    {
+    }
+}
     return 0; 
-}
-
-}
 
 }
 /*countExpensive:
@@ -92,26 +84,25 @@ int removeStockItem(VendingMachine *vm, int ID, StockItem *result){
 
 for (int i = 0; i < vm -> numSlots; ++i){
     if (vm -> slots[i].ID == ID){ 
-        vm -> slots[i].stock = 0; 
-        vm -> slots[i].ID = 0; 
-        vm -> slots[i].price = 0.0; 
+        *result = vm -> slots[i];
 
+        vm -> slots[i].ID = 0; 
+        vm -> slots[i].stock = 0; 
+        vm -> slots[i].price = 0.0; 
+        vm -> slots[i].maxStock = 0;
         return 1; 
-    }else { 
-        return 0; 
     }
 }
-
-
-
+    return 0;
 }
+
+
 /*freeVendingMachine: 
 this function takes a vendingMachine and frees the memory allocated to it
 */
 void freeVendingMachine(VendingMachine *vm){
 
-free(vm); 
-vm = NULL; 
-
+free(vm -> slots); 
+free (vm);
 
 }

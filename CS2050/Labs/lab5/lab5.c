@@ -6,6 +6,7 @@
 //int maxStock 
 //float price 
 
+//used my prelab 5 grocerylist for reference 
 struct VendingMachine_t {
     int numSlots; 
     StockItem *slots;
@@ -18,6 +19,7 @@ this function returns a pointer to the new array or NULL if failure.
 */
 VendingMachine * newMachine(int numSlots){
 
+//VendingMachine Memory
 VendingMachine *vm = (VendingMachine *)malloc(sizeof(VendingMachine));
 if (vm == NULL){
     return NULL; 
@@ -31,9 +33,13 @@ if (vm -> slots == NULL){
 
 
 vm -> numSlots = numSlots; 
-//set all values to 0; 
+
+//set all values of vending machine to 0; 
 for (int i = 0; i < numSlots; i++){ 
 vm->slots[i].ID = 0;
+vm -> slots[i].price = 0.0;
+vm -> slots[i].stock = 0; 
+vm -> slots[i].maxStock = 0; 
 }
 
 
@@ -62,6 +68,7 @@ for (int i = 0; i < vm -> numSlots; i++){
 this function takes a vending machine and returns the NUMBER of items with a price >=3
 */
 int countExpensive(VendingMachine *vm){
+
 //count variable
 int count = 0; 
 //if price >= 3 increase count
@@ -82,10 +89,14 @@ failure = 0;
 */
 int removeStockItem(VendingMachine *vm, int ID, StockItem *result){
 
+//if given ID is already removed or ( = 0) return 1;  
+if (ID <= 0){
+    return 1; 
+}
+//set all items from that ID to 0 and empty the slot.
 for (int i = 0; i < vm -> numSlots; ++i){
     if (vm -> slots[i].ID == ID){ 
         *result = vm -> slots[i];
-
         vm -> slots[i].ID = 0; 
         vm -> slots[i].stock = 0; 
         vm -> slots[i].price = 0.0; 

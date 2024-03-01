@@ -38,7 +38,7 @@ if (board ->arena[cell] == 1 ){
     board -> shots++;
     board -> score = (float) board ->hits / board->shots; //change 
     }
-return 0; 
+    return 0; 
    
 
 }
@@ -58,7 +58,6 @@ for (int i = 0; i < BOARD_SIZE; ++i){
 return count; 
 
 }
-
 
 /*getShotsTaken:
 this function takes the number of total shots taken from the board 

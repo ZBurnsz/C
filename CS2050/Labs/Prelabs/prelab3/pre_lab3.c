@@ -31,7 +31,7 @@ int *createIntArray(FILE *fp, int *length) {
     *((float *)(array - 1)) = mean;
 
     // Return a pointer to the integer array (excluding the mean float)
-    return array;
+    return array; 
 }
 
 float getArrayMean(int *array, int length) {

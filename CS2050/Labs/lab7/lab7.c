@@ -35,17 +35,22 @@ failure = 0
 */
 int addStockItem(VendingMachine *vm, StockItem item){
 //assume no duplicates
-//dont need to sort the list 
+//dont need to sort the items 
+VendingMachine *newNode = (VendingMachine*)malloc(sizeof(VendingMachine));
 
- struct VendingMachineNode *newNode = (struct VendingMachineNode*)malloc(sizeof(struct VendingMachineNode));
+if (newNode == NUll){
+    return 0; 
+}else{
+    newNode-> = item; 
+    newNode->next = VendingMachine; 
 
-    newNode->item = newNode->item;  //probably not gonna work; 
-    newNode->next = vm->head; 
-    vm->head = newNode; 
-    vm->numSlots++; 
 
 }
 
+
+
+
+}
 /*countExpensive:
 this function takes a vending machine and returns the number of items even if one is out of stock. 
 */

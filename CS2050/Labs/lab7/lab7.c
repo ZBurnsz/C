@@ -33,23 +33,21 @@ the next slto of the linked list.
 success = 1 
 failure = 0
 */
-int addStockItem(VendingMachine *vm, StockItem item){
-//assume no duplicates
-//dont need to sort the items 
-VendingMachine *newNode = (VendingMachine*)malloc(sizeof(VendingMachine));
+int addStockItem(VendingMachine *vm, StockItem item) {
+    if (vm == NULL) {
+        return 0; // Invalid vending machine
+    }
 
-if (newNode == NUll){
-    return 0; 
-}else{
-    newNode-> = item; 
-    newNode->next = VendingMachine; 
-
-
-}
-
-
-
-
+    // Create a new node
+    VendingMachineNode *newNode = (VendingMachineNode*)malloc(sizeof(VendingMachineNode));
+    if (newNode == NULL) {
+        return 0; // Memory allocation failed
+    }
+    newNode->item = item;
+    newNode->next = vm->head;
+    vm->head = newNode;
+    vm->numSlots++;
+    return 1; // Successful insertion
 }
 /*countExpensive:
 this function takes a vending machine and returns the number of items even if one is out of stock. 

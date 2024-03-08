@@ -1,6 +1,6 @@
 #include "lab7.h"
 
-
+typedef struct vendingMachineNode VendingMachineNode; 
 
 struct VendingMachineNode {
     StockItem *item; 

@@ -41,13 +41,13 @@ int addStockItem(VendingMachine *vm, StockItem item) {
     // Create a new node
     struct VendingMachineNode *newNode = (struct VendingMachineNode*)malloc(sizeof(structVendingMachineNode));
     if (newNode == NULL) {
-        return 0; // Memory allocation failed
+        return 0; 
     }
-    newNode->item = item;
+    newNode->item = newNode->item;
     newNode->next = vm->head;
     vm->head = newNode;
     vm->numSlots++;
-    return 1; // Successful insertion
+    return 1; 
 }
 int addStockItem(VendingMachine *vm, StockItem item){
 //assume no duplicates
@@ -116,12 +116,12 @@ while (current != NULL){
 this function takes a vendingMachine and frees the memory allocated to it
 */
 void freeVendingMachine(VendingMachine *vm){
-struct VendingMachineNode *current = vm; 
+struct VendingMachineNode *current = vm->head; 
 while(current != NULL){
     struct VendingMachineNode *temp = current; 
     current = current->next; 
     free(temp);
 }
 
-return NULL; 
+free(vm);
 }

@@ -33,24 +33,35 @@ the next slot of the linked list.
 success = 1 
 failure = 0
 */
+int addStockItem(VendingMachine *vm, StockItem item) {
+    if (vm == NULL) {
+        return 0; // Invalid vending machine
+    }
+
+    // Create a new node
+    struct VendingMachineNode *newNode = (struct VendingMachineNode*)malloc(sizeof(structVendingMachineNode));
+    if (newNode == NULL) {
+        return 0; // Memory allocation failed
+    }
+    newNode->item = item;
+    newNode->next = vm->head;
+    vm->head = newNode;
+    vm->numSlots++;
+    return 1; // Successful insertion
+}
 int addStockItem(VendingMachine *vm, StockItem item){
 //assume no duplicates
-//dont need to sort the items 
-VendingMachine *newNode = (VendingMachine*)malloc(sizeof(VendingMachine));
+//dont need to sort the list 
 
-if (newNode == NUll){
-    return 0; 
-}else{
-    newNode-> = item; 
-    newNode->next = VendingMachine; 
+ struct VendingMachineNode *newNode = (struct VendingMachineNode*)malloc(sizeof(struct VendingMachineNode));
 
-
-}
-
-
-
+    newNode->item = newNode->item;  //probably not gonna work; 
+    newNode->next = vm->head; 
+    vm->head = newNode; 
+    vm->numSlots++; 
 
 }
+
 /*countExpensive:
 this function takes a vending machine and returns the number of items even if one is out of stock. 
 */
@@ -111,4 +122,6 @@ while(current != NULL){
     current = current->next; 
     free(temp);
 }
+
+return NULL; 
 }

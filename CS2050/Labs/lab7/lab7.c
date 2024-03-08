@@ -106,6 +106,4 @@ while(current != NULL){
     current = current->next; 
     free(temp);
 }
-
-return NULL; 
 }

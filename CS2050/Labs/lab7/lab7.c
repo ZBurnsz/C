@@ -4,7 +4,7 @@ typedef struct vendingMachineNode VendingMachineNode;
 
 struct VendingMachineNode {
     StockItem *item; 
-    VendingMachine *next; 
+    struct VendingMachineNode *next; 
 }; 
 
 struct VendingMachine_t{
@@ -33,33 +33,22 @@ the next slot of the linked list.
 success = 1 
 failure = 0
 */
-int addStockItem(VendingMachine *vm, StockItem item) {
-    if (vm == NULL) {
-        return 0; // Invalid vending machine
-    }
 
-    // Create a new node
-    struct VendingMachineNode *newNode = (struct VendingMachineNode*)malloc(sizeof(structVendingMachineNode));
-    if (newNode == NULL) {
-        return 0; 
-    }
-    newNode->item = newNode->item;
-    newNode->next = vm->head;
-    vm->head = newNode;
-    vm->numSlots++;
-    return 1; 
-}
 int addStockItem(VendingMachine *vm, StockItem item){
 //assume no duplicates
 //dont need to sort the list 
 
  struct VendingMachineNode *newNode = (struct VendingMachineNode*)malloc(sizeof(struct VendingMachineNode));
 
-    newNode->item = newNode->item;  //probably not gonna work; 
+
+    if (newNode == NULL){
+        return 0; 
+    }
+    newNode->item = &item;  //probably not gonna work; 
     newNode->next = vm->head; 
     vm->head = newNode; 
     vm->numSlots++; 
-
+    return 1; 
 }
 
 /*countExpensive:
@@ -105,7 +94,7 @@ struct VendingMachineNode *current = vm->head;
 
 while (current != NULL){
     if (current->item->ID == ID){
-        StockItem *result = current->item->ID;
+        *result = *(current->item);
         return 1; 
     }
     current = current->next; 

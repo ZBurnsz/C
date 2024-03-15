@@ -1,5 +1,5 @@
 #include "lab8.h"
-
+//used lab 7 implementation, prelab 8 for reference. 
 
 typedef struct vendingMachineNode VendingMachineNode; 
 
@@ -144,7 +144,6 @@ while (current != NULL){
          *result = *(current->item);
          if (before != NULL){
             before->next = current -> next; 
-
          }else {
             vm->head = current->next; 
          }

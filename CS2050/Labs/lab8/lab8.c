@@ -86,15 +86,12 @@ this function takes a vendingmachine and prints the ID for each item in the VM.
 */
 void printIDS(VendingMachine *vm){
 //all in 1 line seperated by commas \n at end 
-if (vm == NULL){
-    return 0; 
-}
 
 struct vendingMachineNode* current = vm->head; 
 
 while(current != NULL){
 printf("%d, ", current->item->ID);
-current = curent->next; 
+current = current->next; 
 }
 
 printf("\n");
@@ -110,7 +107,7 @@ if (vm == NULL){
     return 0; 
 }
 
-struct vendingMachineNode *current = vm -> head; 
+vendingMachineNode *current = vm -> head; 
 
 while (current != NULL){
     if (current->item->ID == ID){
@@ -121,7 +118,7 @@ while (current != NULL){
             return 0; 
         }
     }
-    current = current -> next; 
+    current = current->next; 
 }
 return 0; 
 
@@ -150,8 +147,8 @@ while (current != NULL){
          }else {
             vm->head = current->next; 
          }
-         free(current);
          free(current->item);
+         free(current);
          return 1; 
     }
     before = current; 

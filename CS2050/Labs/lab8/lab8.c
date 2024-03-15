@@ -5,12 +5,12 @@ typedef struct vendingMachineNode VendingMachineNode;
 
 struct VendingMachineNode {
     StockItem *item; 
-    struct VendingMachineNode *next; 
-}; 
+    VendingMachineNode *next; 
+}vendingMachineNode; 
 
 struct VendingMachine_t{
     int numSlots; 
-    struct VendingMachineNode *head; 
+    VendingMachineNode  *head; 
 };
 
 
@@ -18,12 +18,15 @@ struct VendingMachine_t{
 this function uses a linked list to create a new empty vending machine 
 and returns a pointer that linked list
 */
-VendingMachine * newMachine(void){
+VendingMachine * newMachine(){
+    VendingMachine *vm = (VendingMachine*)malloc(sizeof(VendingMachine));
+ if (vm == NULL) {
+    return NULL; 
 
-
-
-
-
+    } else {
+        vm->head = NULL; 
+    }
+    return vm; 
 
 }
 /*addStockItem 
@@ -35,26 +38,62 @@ failure = 0
 */
 int addStockItem(VendingMachine *vm, StockItem item, int afterID){
 
+ struct VendingMachineNode *newNode = (struct VendingMachineNode*)malloc(sizeof(struct VendingMachineNode));
+
+if (newNode == NULL){
+    return 0; 
+}
+
+//insert new item at head of list if less than 0
+if (afterID <= 0){
+    newNode -> next = vm->head; 
+    vm->head = newNode; 
+    return 1; 
+}
 
 
+struct VendingMachineNode* current = vm->head;
+//find the afterID node. 
+if (current->item->ID != afterID){
+    current = current->next; 
+}
+
+//put item in the node after the afterID 
+if (current != NULL){
+    newNode -> next = current->next; 
+    current->next = newNode; 
+    return 1; 
+}
+
+//if not found insert at end 
+current = vm->head; 
+while(current != NULL){
+    current = current -> next; 
+}
+current->next = newNode; 
+return 1; 
 
 
 }
+
+
+
+
 /*printIDS
 this function takes a vendingmachine and prints the ID for each item in the VM. 
-
-
-
 */
 void printIDS(VendingMachine *vm){
 //all in 1 line seperated by commas \n at end 
 
+struct vendingMachineNode *current= vm->head; 
+
+while(current != NULL){
+    printf("%d, ", current->item->ID);
+    current = current->next; 
+}
 
 
-
-
-
-
+printf("\n");
 
 }
 /*purchaseItem 
@@ -63,10 +102,24 @@ If item was not found then return 0.
 */
 int purchaseItem(VendingMachine *vm, int ID){
 
+if (vm == NULL){
+    return 0; 
+}
 
+struct vendingMachineNode *current = vm -> head; 
 
-
-
+while (current != NULL){
+    if (current->item->ID == ID){
+        if (current->item->ID > 0){
+            current->item->stock--;
+            return 1; 
+        }else {
+            return 0; 
+        }
+    }
+    current = current -> next; 
+}
+return 0; 
 
 }
 /*removeStockItem
@@ -75,11 +128,26 @@ the result pointer with the stock item and remove that item from the vendingmach
 */
 int removeStockItem(VendingMachine *vm, int ID, StockItem *result){
 
+if (vm == NULL){
+    return 0; 
+}
 
 
+struct vendingMachineNode *current = vm->head; 
+struct vendingMachineNode *before = NULL;
 
 
+while (current != NULL){
+    if (current->item->ID == ID){
+         *result = *(current->item);
+         return 1; 
+    }
 
+    current = current->next; 
+}
+
+
+return 0; 
 
 }
 
@@ -88,11 +156,14 @@ this function takes a vendingMachine and frees the memory allocated to it
 */
 void freeVendingMachine(VendingMachine *vm){
 
-
-
-
-
-
-
-
+struct VendingMachineNode *current = vm->head; 
+while(current != NULL){
+    struct VendingMachineNode *temp = current; 
+    current = current->next; 
+    free(temp);
 }
+
+free(vm);
+}
+
+

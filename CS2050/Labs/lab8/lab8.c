@@ -5,14 +5,13 @@ typedef struct vendingMachineNode VendingMachineNode;
 
 struct VendingMachineNode {
     StockItem *item; 
-    VendingMachineNode *next; 
-}vendingMachineNode; 
+    struct VendingMachineNode *next; 
+}; 
 
 struct VendingMachine_t{
     int numSlots; 
-    VendingMachineNode  *head; 
+    struct VendingMachineNode *head; 
 };
-
 
 /*newMachine: 
 this function uses a linked list to create a new empty vending machine 
@@ -43,9 +42,14 @@ int addStockItem(VendingMachine *vm, StockItem item, int afterID){
 if (newNode == NULL){
     return 0; 
 }
+newNode -> item = (StockItem*)malloc(sizeof(StockItem));
+*(newNode->item) = item; 
+newNode -> next = NULL; 
+
+
 
 //insert new item at head of list if less than 0
-if (afterID <= 0){
+if (afterID <= 0 || vm->head == NULL){
     newNode -> next = vm->head; 
     vm->head = newNode; 
     return 1; 
@@ -53,16 +57,14 @@ if (afterID <= 0){
 
 
 struct VendingMachineNode* current = vm->head;
-//find the afterID node. 
-if (current->item->ID != afterID){
-    current = current->next; 
-}
-
-//put item in the node after the afterID 
-if (current != NULL){
-    newNode -> next = current->next; 
-    current->next = newNode; 
-    return 1; 
+//put after the afterID node that is found.  
+while (current != NULL){
+    if (current->item->ID == afterID){
+        newNode->next = current->next; 
+        current->next = newNode; 
+        return 1; 
+    }
+    current = current -> next; 
 }
 
 //if not found insert at end 
@@ -84,14 +86,16 @@ this function takes a vendingmachine and prints the ID for each item in the VM.
 */
 void printIDS(VendingMachine *vm){
 //all in 1 line seperated by commas \n at end 
-
-struct vendingMachineNode *current= vm->head; 
-
-while(current != NULL){
-    printf("%d, ", current->item->ID);
-    current = current->next; 
+if (vm == NULL){
+    return 0; 
 }
 
+struct vendingMachineNode* current = vm->head; 
+
+while(current != NULL){
+printf("%d, ", current->item->ID);
+current = curent->next; 
+}
 
 printf("\n");
 
@@ -110,7 +114,7 @@ struct vendingMachineNode *current = vm -> head;
 
 while (current != NULL){
     if (current->item->ID == ID){
-        if (current->item->ID > 0){
+        if (current->item->stock > 0){
             current->item->stock--;
             return 1; 
         }else {
@@ -140,9 +144,17 @@ struct vendingMachineNode *before = NULL;
 while (current != NULL){
     if (current->item->ID == ID){
          *result = *(current->item);
+         if (before != NULL){
+            before->next = current -> next; 
+
+         }else {
+            vm->head = current->next; 
+         }
+         free(current);
+         free(current->item);
          return 1; 
     }
-
+    before = current; 
     current = current->next; 
 }
 
@@ -161,6 +173,7 @@ while(current != NULL){
     struct VendingMachineNode *temp = current; 
     current = current->next; 
     free(temp);
+    free(temp->item);
 }
 
 free(vm);

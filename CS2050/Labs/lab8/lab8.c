@@ -79,15 +79,16 @@ return 1;
 }
 
 
-
-
 /*printIDS
 this function takes a vendingmachine and prints the ID for each item in the VM. 
 */
 void printIDS(VendingMachine *vm){
 //all in 1 line seperated by commas \n at end 
-
-struct vendingMachineNode* current = vm->head; 
+if (vm == NULL){
+    printf("Vending Machine is empty\n");
+    return;
+    }
+struct VendingMachineNode *current = vm->head; 
 
 while(current != NULL){
 printf("%d, ", current->item->ID);
@@ -107,7 +108,7 @@ if (vm == NULL){
     return 0; 
 }
 
-vendingMachineNode *current = vm -> head; 
+struct VendingMachineNode *current = vm -> head; 
 
 while (current != NULL){
     if (current->item->ID == ID){
@@ -134,8 +135,8 @@ if (vm == NULL){
 }
 
 
-struct vendingMachineNode *current = vm->head; 
-struct vendingMachineNode *before = NULL;
+struct VendingMachineNode *current = vm->head; 
+struct VendingMachineNode *before = NULL;
 
 
 while (current != NULL){
@@ -147,8 +148,6 @@ while (current != NULL){
          }else {
             vm->head = current->next; 
          }
-         free(current->item);
-         free(current);
          return 1; 
     }
     before = current; 
@@ -169,8 +168,8 @@ struct VendingMachineNode *current = vm->head;
 while(current != NULL){
     struct VendingMachineNode *temp = current; 
     current = current->next; 
-    free(temp);
     free(temp->item);
+    free(temp);
 }
 
 free(vm);

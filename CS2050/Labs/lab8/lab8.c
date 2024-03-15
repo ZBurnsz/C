@@ -147,6 +147,8 @@ while (current != NULL){
          }else {
             vm->head = current->next; 
          }
+         free(current->item);
+         free(current);
          return 1; 
     }
     before = current; 

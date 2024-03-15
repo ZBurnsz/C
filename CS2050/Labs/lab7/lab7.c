@@ -1,4 +1,7 @@
 #include "lab7.h"
+//USED LAB 5 AS REFERENCE
+//used prelab 6 / 7 as reference. 
+
 
 typedef struct vendingMachineNode VendingMachineNode; 
 

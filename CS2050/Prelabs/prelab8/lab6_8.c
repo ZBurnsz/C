@@ -179,11 +179,6 @@ List *removeObject(int obj, List *list, int *errorCode) {
 
 
 
-
-
-
-
-
 List *freeList(List *list) {
     List *current = list;
     while (current != NULL) {

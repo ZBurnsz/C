@@ -1,11 +1,11 @@
 #include "lab9.h"
 #include <string.h>
 
-typedef struct  { 
+struct StringBuilder_t  { 
     char *s; 
     int size; 
     int max; 
-}StringBuilder_t; 
+}; 
 
 
 
@@ -109,8 +109,12 @@ int new = b->size + length;
 if (new >= b->max){
     while (new >= b->max){
         b->max *= 2; 
-        b->s = (char *)realloc(b->s, b->max * sizeof(char)); 
     }
+    char *tmp = (char *)realloc(b->s, b->max * sizeof(char)); 
+    if (tmp == NULL){
+        return 0;
+    }
+    b->s = tmp;
 }
 
 strcat(b->s, s); 

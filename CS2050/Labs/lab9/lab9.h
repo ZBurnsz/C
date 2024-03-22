@@ -1,12 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct StringBuilder_t {
-char *s; 
-int size; 
-int max; 
-
-}StringBuilder;
+typedef struct StringBuilder_t StringBuilder;
 
 
 // O(1)

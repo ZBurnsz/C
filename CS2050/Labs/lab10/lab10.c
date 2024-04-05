@@ -1,15 +1,13 @@
 #include "lab10.h"
-
+typedef struct node{
+    void *data;
+    struct node *next; 
+}Node; 
 typedef struct Queue_t{
     Node *front; 
     Node *back; 
     int size; 
 }Queue; 
-
-typedef struct node{
-    int *data;
-    struct node *next; 
-}Node; 
 
 
 // O(1)
@@ -36,13 +34,10 @@ return q;
 this function returns the number of items in the queue
 */
 int getSize(Queue *q){
-    int count = 0; 
-    Queue *temp = q->front; 
-while (q != NULL){
-    count++; 
-    return count; 
-}
-//or return q->size; 
+  if (q == NULL){
+    return 0; 
+  }
+  return q->size; 
 }
 
 // O(1)
@@ -80,7 +75,7 @@ return 1;
 this function takes a queue and returns the item at the front of the queue
 */
 void * peek(Queue *q){
-    if(q == NULL){
+    if(q == NULL ||q->front == NULL){
         return NULL; 
     }
 return q->front->data; 
@@ -94,8 +89,10 @@ return q->front->data;
 this function takes a queue and removes and returns the item at the front of the queue; 
 */
 void * deQueue(Queue *q){
+    if (q == NULL||q->front==NULL){
+        return NULL;
+    }
 Node *temp = q->front; 
-
 void *data = temp->data; 
 
 q->front = q->front->next; 
@@ -116,7 +113,7 @@ while (q->front !=NULL){
     q->front = q->front->next; 
     free(temp);
 }
-free(q)
+free(q);
 
 }
 

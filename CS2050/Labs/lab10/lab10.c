@@ -1,8 +1,8 @@
 #include "lab10.h"
 
 typedef struct Queue_t{
-    int *front; 
-    int *back; 
+    Node *front; 
+    Node *back; 
     int size; 
 }Queue; 
 

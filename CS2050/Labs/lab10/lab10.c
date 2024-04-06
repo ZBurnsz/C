@@ -3,6 +3,7 @@ typedef struct node{
     void *data;
     struct node *next; 
 }Node; 
+
 typedef struct Queue_t{
     Node *front; 
     Node *back; 

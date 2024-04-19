@@ -81,17 +81,17 @@ for (int i = 0; i < db->size; i++ ){
         max = db->cars[i].price;
     }
 }
-double *count = (double *)calloc(max + 1,sizeof(double));
+double *count = (double *)calloc(max + 1, sizeof(double));
 
 for (int i = 0; i < db->size; i++){
-    count[(int)db->cars[i].price]++; 
+    count[(int)(db->cars[i].price)]++; 
 
 }
 
 printf("Price:");
 for (int i = 0; i <= max; i++){
     while (count[i] > 0){
-        printf("$%.2d, ", i);
+        printf("$%.2f, ",(double)i);
         count[i]--;
     }
 }
@@ -145,7 +145,7 @@ while (bottom <= top){
     }else if(db->cars[mid].price < price){
         bottom = mid + 1; 
     }else {
-        bottom = mid - 1;   
+        top = mid - 1;   
     }
 }
 
@@ -158,6 +158,9 @@ this function takes in a database and frees all memmory allocated to it
 */
 void destroy(Database *db){
 //o(1)
-free(db);
+if (db != NULL) {
+        free(db->cars);
+        free(db);
+}
 }
 

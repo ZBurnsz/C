@@ -64,7 +64,7 @@ free(count);
 
 
 
-
+//
 /*printPriceSorted:
 this functions takes in a database and prints he prices of all the cars in ascending order
 */

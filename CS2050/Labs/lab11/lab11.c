@@ -59,7 +59,6 @@ for (int i = 0; i <= max; i++){
 }
 printf("\n");
 free(count);
-    
 }
 
 
@@ -91,13 +90,13 @@ for (int i = 0; i < db->size; i++){
 printf("Price:");
 for (int i = 0; i <= max; i++){
     while (count[i] > 0){
-        printf("$%.2f, ",(double)i);
+        printf("$%.2d, ", i);
         count[i]--;
     }
 }
 printf("\n");
 free(count);
-    
+
 }
 /*getPN_FromSKU: 
 this function takes in a database and a sku number 
@@ -158,9 +157,7 @@ this function takes in a database and frees all memmory allocated to it
 */
 void destroy(Database *db){
 //o(1)
-if (db != NULL) {
-        free(db->cars);
-        free(db);
+free(db);
 }
 }
 

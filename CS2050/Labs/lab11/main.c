@@ -24,6 +24,10 @@ printf("OEM from SKU %d: %llu", SKU, getPN_FromSKU(db, SKU));
 double price = 2235.12; 
 printf("SKU from price $%.2f: %d", price, getSKU_FromPrice(db, price));
 
+
+printf("hello is this working???");
+
+
 destroy(db);
 
 return 0; 

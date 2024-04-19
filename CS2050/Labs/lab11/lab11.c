@@ -6,13 +6,7 @@ int size;
 
 }Database;
 
-
-typedef struct Car_t {
-int SKU; 
-double Price; 
-long OEM_PN
-
-}Car;
+typedef struct Car_t Car;
 
 
 /*makeDatabase:
@@ -41,7 +35,7 @@ void printSKU_Sorted(Database *db){
 // O(n)
 //SKUs: 10057, 10081, 20099
 if (db == NULL || db->cars == NULL || db->size <= 0){
-    return NULL;
+    return;
 }
 
 int max = db->cars[0].SKU;
@@ -50,7 +44,8 @@ for (int i = 0; i < db->size; i++ ){
         max = db->cars[i].SKU;
     }
 }
-int *count;
+int *count = (int *)calloc(max + 1,sizeof(int));
+
 for (int i = 0; i < db->size; i++){
     count[db->cars[i].SKU]++;
 }
@@ -62,7 +57,7 @@ for (int i = 0; i <= max; i++){
         count[i]--;
     }
 }
-printf('\n');
+printf("\n");
 free(count);
     
 }
@@ -77,29 +72,30 @@ void printPriceSorted(Database *db){
 // O(n)
 //prices: $23185.00, $54899.00, \n
 if (db == NULL || db->cars == NULL || db->size <= 0){
-    return NULL;
+    return;
 }
 
-double max = db->cars[0].Price;
+double max = db->cars[0].price;
 for (int i = 0; i < db->size; i++ ){
-    if (db->cars[i].Price > max){
-        max = db->cars[i].Price;
+    if (db->cars[i].price > max){
+        max = db->cars[i].price;
     }
 }
-double *count;
+double *count = (double *)calloc(max + 1,sizeof(double));
+
 for (int i = 0; i < db->size; i++){
-    count[db->cars[i].Price]++; 
+    count[(int)db->cars[i].price]++; 
 
 }
 
 printf("Price:");
 for (int i = 0; i <= max; i++){
     while (count[i] > 0){
-        printf("%d, ", i);
+        printf("$%.2d, ", i);
         count[i]--;
     }
 }
-printf('\n');
+printf("\n");
 free(count);
     
 }
@@ -113,7 +109,7 @@ unsigned long long getPN_FromSKU(Database *db, int SKU){
 if (db == NULL || db->cars == NULL || db->size <= 0){
     return -1;
 }
-int bottom; 
+int bottom = 0; 
 int top = db->size - 1; 
 
 while (bottom <= top){
@@ -137,16 +133,16 @@ int getSKU_FromPrice(Database *db, double price){
 // O(log(n))
 //not found -1
 if (db == NULL || db->cars == NULL || db->size <= 0){
-    return -1;
+    return -1; 
 }
-int bottom; 
+int bottom = 0;  
 int top = db->size - 1; 
 
 while (bottom <= top){
     int mid = bottom + (bottom - top) / 2;
-    if (db->cars[mid].Price == price){
-        return db->cars[mid].OEM_PN;
-    }else if(db->cars[mid].Price < price){
+    if (db->cars[mid].price == price){
+        return db->cars[mid].SKU;
+    }else if(db->cars[mid].price < price){
         bottom = mid + 1; 
     }else {
         bottom = mid - 1;   

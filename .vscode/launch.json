@@ -1,6 +1,7 @@
 {
   "version": "0.2.0",
   "configurations": [
+    
     {
       "name": "C/C++ Runner: Debug Session",
       "type": "lldb",
@@ -10,4 +11,5 @@
       "program": "/Users/zacharyburns/Documents/GitHub/C/build/Debug/outDebug"
     }
   ]
+
 }

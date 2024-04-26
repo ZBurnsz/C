@@ -1,166 +1,155 @@
 #include "lab11.h"
 
-typedef struct Database_t{
-Car *cars;
-int size; 
+// Structure to represent a node in the database
+typedef struct Node_t {
+    Car car;
+    struct Node_t* left;
+    struct Node_t* right;
+} Node;
 
-}Database;
+// Structure to represent the database
+struct Database_t {
+    Node* root;
+};
 
-typedef struct Car_t Car;
+// Helper function to create a new node
+Node* createNode(Car car) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    if (newNode != NULL) {
+        newNode->car = car;
+        newNode->left = NULL;
+        newNode->right = NULL;
+    }
+    return newNode;
+}
 
+// Helper function to perform inorder traversal and print SKUs
+void inorderPrintSKU(Node* root) {
+    if (root != NULL) {
+        inorderPrintSKU(root->left);
+        printf("%d", root->car.SKU);
+        if (root->right != NULL) {
+            printf(", ");
+        }
+        inorderPrintSKU(root->right);
+    }
+}
 
-/*makeDatabase:
-this function makes an array of cars using a size input and 
-returns a pointer to a new array of cars 
-*/
-Database * makeDatabase(Car *cars, int size){
+// Helper function to perform inorder traversal and print prices
+void inorderPrintPrice(Node* root) {
+    if (root != NULL) {
+        inorderPrintPrice(root->left);
+        printf("$%.2f", root->car.price);
+        if (root->right != NULL) {
+            printf(", ");
+        }
+        inorderPrintPrice(root->right);
+    }
+}
+
+// Helper function to destroy the database recursively
+void destroyDatabase(Node* root) {
+    if (root != NULL) {
+        destroyDatabase(root->left);
+        destroyDatabase(root->right);
+        free(root);
+    }
+}
+
 // O(n^2)
-Database *db = (Database*)malloc(sizeof(Database));
-
-if (db == NULL){
-    return NULL; 
+Database* makeDatabase(Car* cars, int size) {
+    Database* db = (Database*)malloc(sizeof(Database));
+    if (db == NULL) {
+        return NULL; // Memory allocation failed
+    }
+    db->root = NULL; // Initialize root node
+    for (int i = 0; i < size; i++) {
+        Node* current = db->root;
+        Node* parent = NULL;
+        Node* newNode = createNode(cars[i]);
+        if (newNode == NULL) {
+            destroy(db);
+            return NULL; // Memory allocation failed
+        }
+        while (current != NULL) {
+            parent = current;
+            if (newNode->car.SKU < current->car.SKU) {
+                current = current->left;
+            } else {
+                current = current->right;
+            }
+        }
+        if (parent == NULL) {
+            db->root = newNode;
+        } else if (newNode->car.SKU < parent->car.SKU) {
+            parent->left = newNode;
+        } else {
+            parent->right = newNode;
+        }
+    }
+    return db;
 }
 
-db->cars = cars; 
-db->size = size; 
-
-return db; 
-
-}
-
-/*printfSKU_Sorted:
-this function takes a database and prints all the SKU's of all the cars in ascending order 
-*/
-void printSKU_Sorted(Database *db){
 // O(n)
-//SKUs: 10057, 10081, 20099
-if (db == NULL || db->cars == NULL || db->size <= 0){
-    return;
-}
-
-int max = db->cars[0].SKU;
-for (int i = 0; i < db->size; i++ ){
-    if (db->cars[i].SKU > max){
-        max = db->cars[i].SKU;
+void printSKU_Sorted(Database* db) {
+    if (db == NULL || db->root == NULL) {
+        return;
     }
-}
-int *count = (int *)calloc(max + 1,sizeof(int));
-
-for (int i = 0; i < db->size; i++){
-    count[db->cars[i].SKU]++;
+    printf("SKUs: ");
+    inorderPrintSKU(db->root);
+    printf("\n");
 }
 
-printf("SKUs:");
-for (int i = 0; i <= max; i++){
-    while (count[i] > 0){
-        printf("%d, ", i);
-        count[i]--;
-    }
-}
-printf("\n");
-free(count);
-    
-}
-
-
-
-//
-/*printPriceSorted:
-this functions takes in a database and prints he prices of all the cars in ascending order
-*/
-void printPriceSorted(Database *db){
 // O(n)
-//prices: $23185.00, $54899.00, \n
-if (db == NULL || db->cars == NULL || db->size <= 0){
-    return;
-}
-
-double max = db->cars[0].price;
-for (int i = 0; i < db->size; i++ ){
-    if (db->cars[i].price > max){
-        max = db->cars[i].price;
+void printPriceSorted(Database* db) {
+    if (db == NULL || db->root == NULL) {
+        return;
     }
-}
-double *count = (double *)calloc(max + 1, sizeof(double));
-
-for (int i = 0; i < db->size; i++){
-    count[(int)(db->cars[i].price)]++; 
-
+    printf("Prices: ");
+    inorderPrintPrice(db->root);
+    printf("\n");
 }
 
-printf("Price:");
-for (int i = 0; i <= max; i++){
-    while (count[i] > 0){
-        printf("$%.2f, ",(double)i);
-        count[i]--;
+// O(log(n))
+unsigned long long getPN_FromSKU(Database* db, int SKU) {
+    if (db == NULL || db->root == NULL) {
+        return -1;
     }
-}
-printf("\n");
-free(count);
-    
-}
-/*getPN_FromSKU: 
-this function takes in a database and a sku number 
-and returns the OEM_PN number associated with the car that matches the given SKU
-*/
-unsigned long long getPN_FromSKU(Database *db, int SKU){
-// O(log(n)) binary search 
-//not found = -1 
-if (db == NULL || db->cars == NULL || db->size <= 0){
+    Node* current = db->root;
+    while (current != NULL) {
+        if (SKU == current->car.SKU) {
+            return current->car.OEM_PN;
+        } else if (SKU < current->car.SKU) {
+            current = current->left;
+        } else {
+            current = current->right;
+        }
+    }
     return -1;
 }
-int bottom = 0; 
-int top = db->size - 1; 
 
-while (bottom <= top){
-    int mid = bottom + (bottom - top) / 2;
-    if (db->cars[mid].SKU == SKU){
-        return db->cars[mid].OEM_PN;
-    }else if(db->cars[mid].SKU < SKU){
-        bottom = mid + 1; 
-    }else {
-        bottom = mid - 1;   
-    }
-}
-
-return -1;
-}
-
-/*getSKU_FromPrice: 
-this function takes in a database and a price and returns the associated SKU that matches the price given
-*/
-int getSKU_FromPrice(Database *db, double price){
 // O(log(n))
-//not found -1
-if (db == NULL || db->cars == NULL || db->size <= 0){
-    return -1; 
+int getSKU_FromPrice(Database* db, double price) {
+    if (db == NULL || db->root == NULL) {
+        return -1;
+    }
+    Node* current = db->root;
+    while (current != NULL) {
+        if (price == current->car.price) {
+            return current->car.SKU;
+        } else if (price < current->car.price) {
+            current = current->left;
+        } else {
+            current = current->right;
+        }
+    }
+    return -1;
 }
-int bottom = 0;  
-int top = db->size - 1; 
 
-while (bottom <= top){
-    int mid = bottom + (bottom - top) / 2;
-    if (db->cars[mid].price == price){
-        return db->cars[mid].SKU;
-    }else if(db->cars[mid].price < price){
-        bottom = mid + 1; 
-    }else {
-        top = mid - 1;   
+// O(1)
+void destroy(Database* db) {
+    if (db != NULL) {
+        destroyDatabase(db->root);
+        free(db);
     }
 }
-
-return -1; 
-
-}
-
-/*destroy: 
-this function takes in a database and frees all memmory allocated to it
-*/
-void destroy(Database *db){
-//o(1)
-if (db != NULL) {
-        free(db->cars);
-        free(db);
-}
-}
-

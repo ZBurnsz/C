@@ -26,7 +26,8 @@ int swapMaxMin(int array[], int size) {
     }
     //swapping of the min and max 
     swap(&array[min], &array[max]); 
-    if(min >= max ){|
+    if(min >= max ){
+    int i = 0;
     min = i;
     }
 

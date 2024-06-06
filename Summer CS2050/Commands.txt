@@ -1,0 +1,5 @@
+Compile ....
+
+
+
+mucsmake 2050 labtest(name of assignment) labtest.c(name of file(s))

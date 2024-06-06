@@ -1,0 +1,13 @@
+Prelab 1
+Implement a function that returns information relating to a dataset of integers in an array. Specifically,
+the function must provide the total number of distinct values (i.e., non-duplicates) in the array and the
+smallest value and largest value in the array. Below is a partial prototype for the function. You are free
+to determine the full prototype, e.g., other parameters and return value (if there is one).
+
+
+getArrayInfo(int *array, int n, ... ) // n is the size of array
+
+
+
+HINT: The user of this function will expect three pieces of information from it, and since you can’t have
+three return values, you’ll need to pass some or all the information to the user by reference.

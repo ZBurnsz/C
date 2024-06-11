@@ -36,7 +36,7 @@ bool search(node *root, int data){
     if (root->data == data){
         return true; 
     }
-    if (data < roo=t->data){
+    if (data < root->data){
         return search(root->left, data); 
     }
     else{

@@ -88,7 +88,7 @@ int strRev(char *dest, char *source) {
 
     for (int i = 0; i < sourceLen; i++) {
         dest[i] = source[sourceLen - i - 1];
-    }
+    }      
 
     return (destLen == sourceLen) ? 1 : 0;
 }

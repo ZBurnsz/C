@@ -1,0 +1,101 @@
+Bubble Sort
+------------------------------------
+
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+ no time accumulated
+
+  %   cumulative   self              self     total
+ time   seconds   seconds    calls  Ts/call  Ts/call  name
+  0.00      0.00     0.00       53     0.00     0.00  compareInts
+  0.00      0.00     0.00       21     0.00     0.00  swap
+  0.00      0.00     0.00        2     0.00     0.00  print_int_array
+  0.00      0.00     0.00        1     0.00     0.00  bubbleSort
+  0.00      0.00     0.00        1     0.00     0.00  linearSearch
+♀
+                        Call graph
+
+
+granularity: each sample hit covers 4 byte(s) no time propagated
+
+index % time    self  children    called     name
+                0.00    0.00       8/53          linearSearch [6]
+                0.00    0.00      45/53          bubbleSort [5]
+[2]      0.0    0.00    0.00      53         compareInts [2]
+-----------------------------------------------
+                0.00    0.00      21/21          bubbleSort [5]
+[3]      0.0    0.00    0.00      21         swap [3]
+-----------------------------------------------
+                0.00    0.00       2/2           main [84]
+[4]      0.0    0.00    0.00       2         print_int_array [4]
+-----------------------------------------------
+                0.00    0.00       1/1           main [84]
+[5]      0.0    0.00    0.00       1         bubbleSort [5]
+                0.00    0.00      45/53          compareInts [2]
+                0.00    0.00      21/21          swap [3]
+-----------------------------------------------
+                0.00    0.00       1/1           main [84]
+[6]      0.0    0.00    0.00       1         linearSearch [6]
+                0.00    0.00       8/53          compareInts [2]
+-----------------------------------------------
+♀
+Index by function name
+
+   [5] bubbleSort              [6] linearSearch            [3] swap
+   [2] compareInts             [4] print_int_array
+
+
+Quick bubbleSort
+------------------------
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+ no time accumulated
+
+  %   cumulative   self              self     total
+ time   seconds   seconds    calls  Ts/call  Ts/call  name
+  0.00      0.00     0.00       29     0.00     0.00  compareInts
+  0.00      0.00     0.00       15     0.00     0.00  swap
+  0.00      0.00     0.00        6     0.00     0.00  quickSortPartition
+  0.00      0.00     0.00        1     0.00     0.00  linearSearch
+  0.00      0.00     0.00        1     0.00     0.00  quickSort
+  0.00      0.00     0.00        1     0.00     0.00  quickSortRecursive
+♀
+                        Call graph
+
+
+granularity: each sample hit covers 4 byte(s) no time propagated
+
+index % time    self  children    called     name
+                0.00    0.00       8/29          linearSearch [5]
+                0.00    0.00      21/29          quickSortPartition [4]
+[2]      0.0    0.00    0.00      29         compareInts [2]
+-----------------------------------------------
+                0.00    0.00      15/15          quickSortPartition [4]
+[3]      0.0    0.00    0.00      15         swap [3]
+-----------------------------------------------
+                0.00    0.00       6/6           quickSortRecursive [7]
+[4]      0.0    0.00    0.00       6         quickSortPartition [4]
+                0.00    0.00      21/29          compareInts [2]
+                0.00    0.00      15/15          swap [3]
+-----------------------------------------------
+                0.00    0.00       1/1           main [86]
+[5]      0.0    0.00    0.00       1         linearSearch [5]
+                0.00    0.00       8/29          compareInts [2]
+-----------------------------------------------
+                0.00    0.00       1/1           main [86]
+[6]      0.0    0.00    0.00       1         quickSort [6]
+                0.00    0.00       1/1           quickSortRecursive [7]
+-----------------------------------------------
+                                  12             quickSortRecursive [7]
+                0.00    0.00       1/1           quickSort [6]
+[7]      0.0    0.00    0.00       1+12      quickSortRecursive [7]
+                0.00    0.00       6/6           quickSortPartition [4]
+                                  12             quickSortRecursive [7]
+-----------------------------------------------
+♀
+Index by function name
+
+   [2] compareInts             [6] quickSort               [7] quickSortRecursive
+   [5] linearSearch            [4] quickSortPartition      [3] swap

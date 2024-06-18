@@ -61,6 +61,7 @@
     "string_view": "c",
     "initializer_list": "c",
     "stdlib.h": "c",
-    "lab3.h": "c"
+    "lab3.h": "c",
+    "lab4.h": "c"
   }
 }

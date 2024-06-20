@@ -12,8 +12,8 @@ List *initList(int *errorCode) {
         *errorCode = 1;
     } else {
         *errorCode = 0;
-        list->object = 0; //initialize the object to 0 start of list 
-        list->next = NULL; //end of list is NULL
+        list->object = 0; 
+        list->next = NULL; 
     }
     return list;
 }
@@ -25,11 +25,11 @@ List *insertAtHead(int value, List *list, int *errorCode) {
         return list;
     }else{
     *errorCode = 0;
-    newNode->object = value; //value to be inserted
-    newNode->next = list; //new node points to the head of the list
+    newNode->object = value; 
+    newNode->next = list; 
     }
     
-    return newNode; //return the new head of the list
+    return newNode; 
 }
 
 int getAtIndex(int index, List *list) {
@@ -42,7 +42,7 @@ int getAtIndex(int index, List *list) {
         current = current->next;
         count++;
     }
-    return -1; // Return -1 if index is out of bounds
+    return -1; 
 }
 
 int getListLength(List *list) {
@@ -61,13 +61,11 @@ int getListLength(List *list) {
 List *insertAtPosition(int pos, int key, List *list, int *errorCode) {
     int length = getListLength(list);
     
-    // Check for invalid position
     if (pos < 1 || pos > length + 1) {
         *errorCode = 1; // Indicate failure
         return list;
     }
 
-    // Inserting at the head
     if (pos == 1) {
         return insertAtHead(key, list, errorCode);
     }

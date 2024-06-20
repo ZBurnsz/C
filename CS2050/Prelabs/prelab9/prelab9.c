@@ -26,11 +26,14 @@ List initEmptyList(int *error) {
 }
 
 int insertHead(void *data, List list) {
+    
     ListNode *newNode = (ListNode *)malloc(sizeof(ListNode));
     if (newNode == NULL) return 1; // Memory allocation error
+
     newNode->data = data;
     newNode->next = list->head;
     list->head = newNode;
+    
     if (list->tail == NULL) {
         list->tail = newNode;
     }

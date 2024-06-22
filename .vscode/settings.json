@@ -64,7 +64,8 @@
     "lab3.h": "c",
     "lab4.h": "c",
     "lab5.h": "c",
-    "stdio.h": "c"
+    "stdio.h": "c",
+    "lab6.h": "c"
   },
   "lldb.displayFormat": "auto",
   "lldb.showDisassembly": "auto",

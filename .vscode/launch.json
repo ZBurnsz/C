@@ -1,7 +1,6 @@
 {
   "version": "0.2.0",
   "configurations": [
-    
     {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
@@ -9,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/Zach/OneDrive/Documents/GitHub/C/Random",
-      "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+      "cwd": "c:/Users/Zach/OneDrive/Documents/GitHub/C/Summer CS2050/lab6",
+      "program": "c:/Users/Zach/OneDrive/Documents/GitHub/C/Summer CS2050/lab6/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

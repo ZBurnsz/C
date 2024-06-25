@@ -1,56 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
 
-int max (int a, int b){
-    return (a > b) ? a : b; 
-}
+int create(int **matrix){
 
+int rows = 3, cols = 4;
 
-bool areDistinct(char str[], int i, int j)
-{
-
-    bool visited[256];
-    for (int i = 0; i < 256; i++)
-        visited[i] = 0;
-
-    for (int k = i; k <= j; k++) {
-        if (visited[str[k]] == true)
-            return false;
-        visited[str[k]] = true;
+matrix = (int **)malloc(rows * sizeof(int *));
+for (int i = 0; i < rows; i++) {
+    matrix[i] = (int *)malloc(cols * sizeof(int));
+    for (int j = 0; j < cols; j++) {
+        matrix[i][j] = i * cols + j; // Assigning values to the 2D array
     }
-    return true;
 }
 
-
-
-int lengthOfLongestSubstring(char* s) {
-    
-int n = strlen(s);
-int result = 0; 
-for (int i = 0; i < n; i++){
-    for (int j = i; j < n; j++){
-        if (areDistinct-(s, i, j)){
-            result = max(result, j - i + 1);
-        }
+// Printing the matrix values
+for (int i = 0; i < rows; i++) {
+    for (int j = 0; j < cols; j++) {
+        printf("%d %d ", matrix[i][j]);
     }
-    return result; 
+    printf("\n");
 }
 
-
+// Freeing the allocated memory
+for (int i = 0; i < rows; i++) {
+    free(matrix[i]);
+}
+free(matrix);
 }
 
-
-
-
+void allocateArray(int **p, int size) {
+    *p = (int *)malloc(size * sizeof(int));
+    for (int i = 0; i < size; i++) {
+        (*p)[i] = i;
+    }
+}
 
 int main() {
+    int *array = NULL;
+    allocateArray(&array, 10);
 
-    char s[] = "abcabcbb";
+    // Printing the array values
+    for (int i = 0; i < 10; i++) {
+        printf("%d ", array[i]);
+    }
 
-    int result = lengthOfLongestSubstring(s);
-
-
+    free(array); // Freeing the allocated memory
     return 0;
 }

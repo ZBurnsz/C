@@ -9,7 +9,7 @@ def move_exe_files(root_folder):
     # Traverse root directory, and list directories as dirs and files as files
     for root, dirs, files in os.walk(root_folder):
         for file in files:
-            if file.endswith(".exe"):
+            if file.endswith(".exe" or "a.out"):
                 # Construct full source path
                 src_path = os.path.join(root, file)
                 

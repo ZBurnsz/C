@@ -36,7 +36,7 @@ void * pop(Stack **top) {
     if (*top == NULL) {
         return NULL; // Stack is empty
     }
-    Stack * temp = *top;
+    Stack * temp = *top; 
     void * poppedData = temp->data;
     *top = (*top)->next;
     free(temp);

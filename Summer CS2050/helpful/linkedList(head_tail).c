@@ -1,4 +1,17 @@
-#include "header.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+
+typedef struct ListNode {
+    void *data;
+    struct ListNode *next;
+} ListNode;
+
+typedef struct {
+    ListNode *head;
+    ListNode *tail;
+    int length;
+} *List;
 
 
 List initEmptyList(int *error) {
@@ -19,6 +32,7 @@ int insertHead(void *data, List list) {
     ListNode *newNode = (ListNode *)malloc(sizeof(ListNode));
     if (newNode == NULL) return 1; // Memory allocation error
 
+
     newNode->data = data;
     newNode->next = list->head;
     list->head = newNode;
@@ -36,6 +50,7 @@ void * getHeadObject(List list) {
 }
 
 int removeHead(List list) {
+
     if (list->head == NULL) return 1; // Empty list
     ListNode *temp = list->head;
     list->head = list->head->next;
@@ -50,15 +65,27 @@ int removeHead(List list) {
 int insertTail(void *data, List list) {
     ListNode *newNode = (ListNode *)malloc(sizeof(ListNode));
     if (newNode == NULL) return 1; // Memory allocation error
+
+
     newNode->data = data;
     newNode->next = NULL;
+
+
     if (list->tail != NULL) {
         list->tail->next = newNode;
+        list->tail = newNode;
+
+
     }
-    list->tail = newNode;
+
+
+
     if (list->head == NULL) {
         list->head = newNode;
+        list->tail = newNode;
     }
+
+
     list->length++;
     return 0;
 }
@@ -84,7 +111,7 @@ int deleteList(List list) {
 }
 
 
-//tests
+//!tests
 
 void testListOperations() {
     int error;

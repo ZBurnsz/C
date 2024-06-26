@@ -3,22 +3,23 @@
 
 
 
+void square(int *k){
+    *k = *k * *k;
 
-
-
-
-
-
-
-int main (void){
-
-
-
-
-
-
-
-
-    return 0; 
 }
 
+
+
+int main (){
+
+int x = 5; 
+
+square(&x);
+
+printf("%d\n", x);
+
+
+return 0;
+}
+
+lafferee c2205

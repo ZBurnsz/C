@@ -65,7 +65,12 @@
     "lab4.h": "c",
     "lab5.h": "c",
     "stdio.h": "c",
-    "lab6.h": "c"
+    "lab6.h": "c",
+    "__split_buffer": "c",
+    "vector": "c",
+    "__hash_table": "c",
+    "bitset": "c",
+    "unordered_map": "c"
   },
   "lldb.displayFormat": "auto",
   "lldb.showDisassembly": "auto",

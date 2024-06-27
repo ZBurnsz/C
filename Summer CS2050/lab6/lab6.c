@@ -37,6 +37,7 @@ if(temp == NULL){
 }
 
 
+
 nodeP->head = NULL; 
 nodeP->tail = NULL;
 nodeP->length = 0;
@@ -130,8 +131,8 @@ if (nodeP->head == NULL){
     nodeP->head = newNode; 
     nodeP->tail = newNode;
 }else {
-    nodeP->tail->next = newNode;
-    nodeP->tail = newNode;
+    nodeP->tail->next = newNode; //node after the tail == newNode
+    nodeP->tail = newNode; //the newNode is now the tail 
 }
 
 nodeP->length++;

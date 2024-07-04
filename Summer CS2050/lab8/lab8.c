@@ -20,7 +20,7 @@ typedef struct _PQueue  {
     Node *head;
     int error;
     int length;
-}*Queue;
+}*PQueue;
 /*
 - (-1) - q is null in geterrorcode 
 1- 
@@ -76,16 +76,13 @@ this function takes a data pointer and a queue pointer, then inserts the data in
 */
 // O(n)
 int pqInsert(void *data, int priority, PQueue q){
-if (data == NULL){
-    fprintf(stderr, "data is NULL (pqInsert)\n");
-    q->error = 3;
-    return 1;
-}
 if (q == NULL){
     fprintf(stderr, "q is NULL (pqInsert)\n");
-    q->error = 3;
     return 1;
 }
+
+
+
 
 Node *newNode = (Node*)malloc(sizeof(Node));
 
@@ -98,58 +95,52 @@ newNode->data = data;
 newNode->priority = priority;
 newNode->next = NULL;
 
-
-if (newNode->priority > priority || q->head == NULL){
+//if queue is empty or newest node has the higher priority 
+if (q->head == NULL || newNode->priority < q->head->priority ){
     newNode->next = q->head;
     q->head = newNode;
-}
+}else{
 
-Node *temp = q->head;
+    Node *temp = q->head;
 
-while (temp != NULL){
-    if (temp->priority <= priority){
-        newNode->next = temp->next;
-        temp->next = newNode;
+    while (temp->next != NULL && temp->next->priority <=newNode->priority){
+            temp = temp->next; 
     }
-    temp = temp->next; 
+    newNode->next = temp->next;
+    temp->next = newNode;
 }
+
 
 q->length++;
 q->error = 0; 
 return 0;
     
-    }
-
+}
 
 /*removeFromHead
 
 
 */
-void * removeFromHead(Queue q){
+void *removeFromHead(PQueue q) {
+  if (q == NULL) {
+    fprintf(stderr, "Queue is NULL (removeFromHead)\n");
+    return NULL;
+  }
 
-if (q == NULL ){
-    fprintf(stderr, "List is NULL(removeFromHead)\n"); 
-    return NULL; 
+  if (q->head == NULL) { // Check for empty queue
+    q->error = 2;
+    return NULL;
+  }
+
+  Node *temp = q->head;
+  void *data = temp->data;
+
+  q->head = q->head->next;
+  free(temp);
+  q->length--;
+
+  return data;
 }
-
-
-
-
-Node *temp = q->head;
-void *data = temp->data;
-
-if (q->head->next == NULL){
-    q->head = NULL;
-}else {
-    q->head = q->head->next; 
-}
-free(temp);
-q->length--; 
-
-
-return data; 
-}
-
 
 
 /*pqRemoveMin: 
@@ -163,7 +154,6 @@ void * pqRemoveMin(PQueue q){
 
 if (q == NULL){
     fprintf(stderr, "q is NULL (pqRemoveMin)\n");
-    q->error = 2;
     return NULL;
     }
 
@@ -179,8 +169,13 @@ this function takes a queue pointer and returns the element with the minimum pri
 void * pqPeek(PQueue q){
 if (q == NULL){
     fprintf(stderr, "q is NULL (pqPeek)\n");
+    return NULL;
+}
+if (q->head == NULL){
+    fprintf(stderr, "Queue is empty (pqPeek)\n");
     q->error = 2;
     return NULL;
+
 }
 
 return q->head->data; 
@@ -194,9 +189,7 @@ this function takes a queue pointer and returns the size of the queue.
 int pqGetSize(PQueue q){
 if(q == NULL){
     fprintf(stderr, "q is NULL (pqGetSize)\n");
-    q->error = 3;
-    return 1;
-
+    return 0;
 }
 
 return q->length;
@@ -214,15 +207,12 @@ if (q == NULL){
     return;
 }
 
-Node *temp = q->head->next;
-Node *nextP = NULL;
-
+Node *temp = q->head;
 while (temp != NULL){
-    nextP = temp->next;
-    free(temp); 
-    temp = nextP;
+    Node *p = temp;
+    temp = temp->next;
+    free(p); 
     }
 free(q);
-q = NULL;
 
 }

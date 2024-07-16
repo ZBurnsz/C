@@ -36,8 +36,6 @@ if(temp == NULL){
     return 1; 
 }
 
-
-
 nodeP->head = NULL; 
 nodeP->tail = NULL;
 nodeP->length = 0;
@@ -58,8 +56,20 @@ if (list == NULL){
     fprintf(stderr,"List pointer is NULL(getSize)\n");
     return 0; 
 }
-return nodeP->length; 
 
+if (nodeP->head == NULL){
+    return 0; 
+}
+
+nodeP->length = 1;
+
+Node *p = nodeP->head;
+
+while(p->next != NULL){
+    p = p->next; 
+    nodeP->length++;
+}
+return nodeP->length; 
 
 }
 

@@ -70,7 +70,8 @@
     "vector": "c",
     "__hash_table": "c",
     "bitset": "c",
-    "unordered_map": "c"
+    "unordered_map": "c",
+    "string": "c"
   },
   "lldb.displayFormat": "auto",
   "lldb.showDisassembly": "auto",

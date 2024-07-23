@@ -1,5 +1,4 @@
 #include <stdio.h>
-<<<<<<< HEAD
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
@@ -76,34 +75,3 @@ int main() {
 
     return 0;
 }
-=======
-
-
-
-int getValue (int array, int n, int max, int min){
-
-    max = array[0];
-    min = array[0];
-
-    for (int i = 0; i < n; i++){
-        if (array[i] > max) max = array[i];
-        if (array[i] < min) min = array[i];
-    }
-    return min, max; 
-}
-
-int main (void){
-
-int max, min = 0; 
-
-int *array[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-int n = 10;
-
-getValu(array, n, max, min); 
-
-
-printf("max: %d\nMin:%d", max, min);
-
-return 0; 
-}
->>>>>>> d736aae (asd)

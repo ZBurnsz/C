@@ -1,72 +1,46 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct Node {
-    int data;
-    struct Node *next;
-    struct Node *prev;
-} Node;
+typedef struct orderedPair {
+    int *first, *second; 
+} orderedPair;
 
-typedef struct {
-    Node *head;
-    Node *tail;
-} DoublyLinkedList;
+orderedPair addOP(orderedPair* a, orderedPair* b) {
+    orderedPair result; 
+    
+    result.first = (int *)malloc(sizeof(int));
+    result.second = (int *)malloc(sizeof(int));
 
-Node* createNode(int data) {
-    Node *newNode = (Node *)malloc(sizeof(Node));
-    if (newNode == NULL) {
-        printf("Memory allocation failed\n");
-        return NULL;
-    }
-    newNode->data = data;
-    newNode->next = NULL;
-    newNode->prev = NULL;
-    return newNode;
+    *result.first = *a->first + *b->first;
+    *result.second = *a->second + *b->second;
+
+    return result;
 }
 
-void insertAtHead(DoublyLinkedList *list, int data) {
-    Node *newNode = createNode(data);
-    if (list->head == NULL) {
-        list->head = newNode;
-        list->tail = newNode;
-    } else {
-        newNode->next = list->head;
-        list->head->prev = newNode;
-        list->head = newNode;
-    }
-}
+int main(void) {
+    orderedPair a, b;
 
-void insertAtTail(DoublyLinkedList *list, int data) {
-    Node *newNode = createNode(data);
-    if (list->tail == NULL) {
-        list->head = newNode;
-        list->tail = newNode;
-    } else {
-        newNode->prev = list->tail;
-        list->tail->next = newNode;
-        list->tail = newNode;
-    }
-}
+    a.first = (int *)malloc(sizeof(int));
+    a.second = (int *)malloc(sizeof(int));
+    *a.first = 1;
+    *a.second = 2;
 
-void displayList(DoublyLinkedList *list) {
-    Node *current = list->head;
-    while (current != NULL) {
-        printf("%d ", current->data);
-        current = current->next;
-    }
-    printf("\n");
-}
+    b.first = (int *)malloc(sizeof(int));
+    b.second = (int *)malloc(sizeof(int));
+    *b.first = 3;
+    *b.second = 4;
 
-// Main function to demonstrate operations
-int main() {
-    DoublyLinkedList list = {NULL, NULL};
+    orderedPair result = addOP(&a, &b);
 
-    insertAtHead(&list, 1);
-    insertAtHead(&list, 2);
-    insertAtTail(&list, 3);
-    insertAtTail(&list, 4);
+    printf("First: %d\nSecond: %d\n", *result.first, *result.second);
 
-    displayList(&list); // Expected output: 2 1 3 4
+    // Free allocated memory
+    free(a.first);
+    free(a.second);
+    free(b.first);
+    free(b.second);
+    free(result.first);
+    free(result.second);
 
-    return 0;
+    return 0; 
 }

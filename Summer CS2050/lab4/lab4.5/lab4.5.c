@@ -8,6 +8,7 @@
  */
 void ** AllocateJagged2DArray(int elementSize, int rows, int lengths[]) {
     void **arrayJagged = (void **)malloc((rows + 1) * sizeof(void *));
+    
     if (arrayJagged == NULL) {
         fprintf(stderr, "Memory allocation failed\n");
         return NULL;

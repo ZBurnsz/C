@@ -35,9 +35,6 @@ void printArray(int *array, int size){
 }
 
 void binarySearch(int *array, int querey){
-
-
-    
     if (!array){
         fprintf(stderr, "Array is empty\n");
         return; 
@@ -46,7 +43,7 @@ void binarySearch(int *array, int querey){
     int mid = (min + max) / 2;
 
 
-
+    
     while (min <= max){
         if (array[mid] == querey){
             printf("Found %d at index %d\n", querey, mid);

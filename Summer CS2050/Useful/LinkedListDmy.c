@@ -31,7 +31,7 @@ if (nodeP == NULL){
     return 1; 
 }
 
-Node *temp = (Node*)malloc(sizeof(Node));
+Node *temp = (Node*)malloc(sizeof(Node)); //temp dummy node 
 
 if(temp == NULL){
     fprintf(stderr, "Temp is NULL (makeList)\n"); 

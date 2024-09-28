@@ -82,8 +82,6 @@ if (q == NULL){
 }
 
 
-
-
 Node *newNode = (Node*)malloc(sizeof(Node));
 
 if (newNode == NULL){
@@ -96,14 +94,15 @@ newNode->priority = priority;
 newNode->next = NULL;
 
 //if queue is empty or newest node has the higher priority 
+//head case 
 if (q->head == NULL || newNode->priority < q->head->priority ){
-    newNode->next = q->head;
-    q->head = newNode;
+    newNode->next = q->head; //pointing the newNode to the head 
+    q->head = newNode; //setting the head as the New node
 }else{
 
     Node *temp = q->head;
 
-    while (temp->next != NULL && temp->next->priority <=newNode->priority){
+    while (temp->next != NULL && temp->next->priority <= newNode->priority){
             temp = temp->next; 
     }
     newNode->next = temp->next;

@@ -96,14 +96,14 @@ void binarySearch(int *array, int size, int query) {
     int left = 0;
     int right = size - 1;
     while (left <= right) {
-        int mid = left + (right - left) / 2;
+        int mid = (left + right) / 2;
         if (array[mid] == query) {
             printf("Found at index %d\n", mid);
             return;
         } else if (array[mid] < query) {
-            left = mid + 1;
+            left = mid - 1;
         } else {
-            right = mid - 1;
+            right = mid + 1;
         }
     }
     printf("Not found\n");
@@ -150,4 +150,36 @@ int main() {
     freeArray(array); // Correctly free the allocated memory
 
     return 0;
+}
+
+
+
+
+int bsHelper(int array[], int mid, int target){
+
+    if (array[mid] == target){
+        return mid;
+    }
+    else if (array[mid] < target){
+        return bsHelper(array, mid + 1, target);
+    }
+    else{
+        return bsHelper(array, mid - 1, target);
+    }
+
+
+
+}
+
+int binarySearch (int array[], int size, target){
+    int mid = size / 2;
+
+    if (!array){
+        return 1; 
+    }else{
+        return bsHelper(array, mid,target); 
+    }
+
+
+
 }

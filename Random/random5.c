@@ -1,153 +1,106 @@
 #include <stdio.h>
-#include <stdlib.h>
 
+#define SIZE 3
 
-//! BST
-typedef struct BST {
-    int data;
-    struct BST *left;
-    struct BST *right;
-    int size;
-} BST;
+char board[SIZE][SIZE];
 
-BST *createNode(int data) {
-    BST *newNode = (BST *)malloc(sizeof(BST));
-    newNode->data = data;
-    newNode->left = NULL;
-    newNode->right = NULL;
-    newNode->size = 1;
-    return newNode;
-}
-
-int insertBST_IfEmpty(BST *tree, int data) {
-    if (tree == NULL) {
-        fprintf(stderr, "Tree is empty (insertBST_IfEmpty)\n");
-        return 1;
-    }
-    tree->data = data;
-    tree->size = 1;
-    tree->left = NULL;
-    tree->right = NULL;
-    return 0;
-}
-
-BST* BSTinsertHelper(BST *tree, int data) {
-    if (tree == NULL) {
-        BST* newBST = (BST*)malloc(sizeof(BST));
-        if (newBST == NULL) {
-            return NULL;
+void initializeBoard() {
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            board[i][j] = ' ';
         }
-        newBST->data = data;
-        newBST->left = NULL;
-        newBST->right = NULL;
-        return newBST;
     }
-    if (data < tree->data) {
-        tree->left = BSTinsertHelper(tree->left, data);
-    } else {
-        tree->right = BSTinsertHelper(tree->right, data);
-    }
-    return tree;
 }
 
-int insertBST(BST *tree, int data) {
-    if (tree == NULL) {
-        fprintf(stderr, "Tree is empty (insertBST)\n");
+void printBoard() {
+    printf("-------------\n");
+    for (int i = 0; i < SIZE; i++) {
+        printf("| %c | %c | %c |\n", board[i][0], board[i][1], board[i][2]);
+        printf("-------------\n");
+    }
+}
+
+int isBoardFull() {
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            if (board[i][j] == ' ') {
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+
+int isWinner(char player) {
+    // Check rows
+    for (int i = 0; i < SIZE; i++) {
+        if (board[i][0] == player && board[i][1] == player && board[i][2] == player) {
+            return 1;
+        }
+    }
+
+    // Check columns
+    for (int j = 0; j < SIZE; j++) {
+        if (board[0][j] == player && board[1][j] == player && board[2][j] == player) {
+            return 1;
+        }
+    }
+
+    // Check diagonals
+    if (board[0][0] == player && board[1][1] == player && board[2][2] == player) {
         return 1;
     }
-    if (tree->size == 0) {
-        return insertBST_IfEmpty(tree, data);
-    }
-    if (BSTinsertHelper(tree, data) == NULL) {
+    if (board[0][2] == player && board[1][1] == player && board[2][0] == player) {
         return 1;
     }
-    tree->size++;
+
     return 0;
-
-
 }
 
-
-//!Binary Search 
-
-int* createArray(int size) {
-    int *array = (int *)malloc((size + 1) * sizeof(int));
-    if (array == NULL) {
-        fprintf(stderr, "Array allocation failed (createArray)\n");
-        return NULL;
-    }
-    array[0] = size;
-    return array + 1;
-}
-
-int getSize(int* array) {
-    if (!array) {
-        fprintf(stderr, "Array is empty (getSize)\n");
+int isValidMove(int row, int col) {
+    if (row < 0 || row >= SIZE || col < 0 || col >= SIZE) {
         return 0;
     }
-    return array[-1];
-}
-
-void binarySearch(int *array, int size, int query) {
-    if (array == NULL) {
-        fprintf(stderr, "Array is empty (binarySearch)\n");
-        return;
+    if (board[row][col] != ' ') {
+        return 0;
     }
-    int left = 0;
-    int right = size - 1;
-    while (left <= right) {
-        int mid = left + (right - left) / 2;
-        if (array[mid] == query) {
-            printf("Found at index %d\n", mid);
-            return;
-        } else if (array[mid] < query) {
-            left = mid + 1;
-        } else {
-            right = mid - 1;
-        }
-    }
-    printf("Not found\n");
+    return 1;
 }
 
-int insertInArray(int* array, int data) {
-    int size = getSize(array);
-    int i;
-    for (i = size - 1; (i >= 0 && array[i] > data); i--) {
-        array[i + 1] = array[i];
-    }
-    array[i + 1] = data;
-    array[-1]++;
-    return 0;
+void makeMove(int row, int col, char player) {
+    board[row][col] = player;
 }
-
-void freeArray(int* array){
-    free(array - 1);
-}
-
-//! array 
-
-
-
-
-
 
 int main() {
-    BST *root = createNode(10);
-    insertBST(root, 5);
-    insertBST(root, 15);
-    insertBST(root, 2);
+    initializeBoard();
+    char currentPlayer = 'X';
 
-    int *array = createArray(5);
-    insertInArray(array, 10);
-    insertInArray(array, 5);
-    insertInArray(array, 15);
-    insertInArray(array, 2);
-    int size = getSize(array);
+    while (1) {
+        printBoard();
 
-    binarySearch(array, size, 15);
-    binarySearch(array, size, 7);
+        int row, col;
+        printf("Player %c's turn. Enter row and column (0-2): ", currentPlayer);
+        scanf("%d %d", &row, &col);
 
-    freeArray(array); // Correctly free the allocated memory
+        if (!isValidMove(row, col)) {
+            printf("Invalid move. Try again.\n");
+            continue;
+        }
+
+        makeMove(row, col, currentPlayer);
+
+        if (isWinner(currentPlayer)) {
+            printf("Player %c wins!\n", currentPlayer);
+            break;
+        }
+
+        if (isBoardFull()) {
+            printf("It's a tie!\n");
+            break;
+        }
+
+        currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+    }
 
     return 0;
 }

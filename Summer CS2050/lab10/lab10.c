@@ -20,10 +20,10 @@ int binarySearch(int *array, int value)
 {
 	int min = 0, max = getSize(array) - 1;
 
-	while(max >= min) 
+	while(min <= max) 
     {
 
-        int median = (max + min) / 2;
+        int median = max + min / 2;
 
 		if(array[median] == value) 
         {

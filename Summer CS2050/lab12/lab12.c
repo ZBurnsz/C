@@ -156,13 +156,13 @@ int HeapInsert(PHeap heap, int key, void *inputData)
             return -1;
         }
     }
-
-    heap->node[heap->size].key = key;
-    heap->node[heap->size].data = inputData;
+    int index = heap->size;
+    heap->node[index].key = key; //[heap->size ] tells you where the next input of the key will be 
+    heap->node[index].data = inputData;
     heap->size++;
 
     insertHelper(heap, heap->size - 1);
-
+;
     return 0;
 }
 

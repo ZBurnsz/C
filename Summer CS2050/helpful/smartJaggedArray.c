@@ -45,7 +45,7 @@ int main() {
     printSmartArray(smartArray, rows, lengths);
 
     // Free the allocated memory
-    freeSmartArray(smartArray);
+    freeSmartArray(smartArray, rows);
 
     return 0;
 }

@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "configurations": [
         {
             "name": "windows-gcc-x64",
@@ -14,4 +15,22 @@
         }
     ],
     "version": 4
+=======
+  "configurations": [
+    {
+      "name": "macos-gcc-arm64",
+      "includePath": [
+        "${workspaceFolder}/**"
+      ],
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "${default}",
+      "cppStandard": "${default}",
+      "intelliSenseMode": "macos-gcc-arm64",
+      "compilerArgs": [
+        ""
+      ]
+    }
+  ],
+  "version": 4
+>>>>>>> 57b9dcfa160ddb8759417f7c73271340ac01027c
 }

@@ -17,6 +17,7 @@ int* createArray(int size){
         array[0] = size;
         return array + 1;
     }
+
 }
 
 int getSize(int *array){
@@ -39,7 +40,7 @@ void binarySearch(int *array, int querey){
         fprintf(stderr, "Array is empty\n");
         return; 
     }
-    int min = 0, max = getSize(array) - 1;
+    int min = 0, max = getSize(array);
     int mid = (min + max) / 2;
 
 

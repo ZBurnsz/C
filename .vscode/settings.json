@@ -71,7 +71,9 @@
     "__hash_table": "c",
     "bitset": "c",
     "unordered_map": "c",
-    "string": "c"
+    "string": "c",
+    "string.h": "c",
+    "stddef.h": "c"
   },
   "lldb.displayFormat": "auto",
   "lldb.showDisassembly": "auto",

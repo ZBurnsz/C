@@ -73,7 +73,8 @@
     "unordered_map": "c",
     "string": "c",
     "string.h": "c",
-    "stddef.h": "c"
+    "stddef.h": "c",
+    "cs3050.h": "c"
   },
   "lldb.displayFormat": "auto",
   "lldb.showDisassembly": "auto",

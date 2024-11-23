@@ -20,16 +20,25 @@ int InsertFailCollision(void *hashtable, int elementSize, int elementCountMax, i
         fprintf(stderr, "Null-InsertFailCollision");
         return 1;
     }
+
     int index = HashFunc(key) % 13; 
     void **table = (void **)hashtable; 
 
     // Collision 
+    //! free 
     if (table[index] != NULL) { 
-        return -1; 
+        free(table[index]);
     }
 
-    table[index] = malloc(elementSize); 
+    table[index] = malloc(elementSize); //need to free 
+
+    if (table[index] == NULL) {
+        fprintf(stderr, "malloc failed-table[index]-insertcollision");
+        return -1;
+    }
+  
     memcpy(table[index], element, elementSize); 
+
     return 0;
 }
 
@@ -57,7 +66,9 @@ void *SearchNoCollision(void *hashtable, int key, int elementSize, int (*HashFun
 // Hashing method using division 
 
 int DivMethod(int key) {
+
     int m = 13; 
+
     return key % m; 
 }
 
@@ -108,10 +119,12 @@ void FreeChainTable(void *hashtable) {
 
             free(temp->element); 
             free(temp); 
+           
         }
         i++; 
     }
     free(table); 
+ 
 }
 
 // Inserts an element into the table 

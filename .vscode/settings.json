@@ -74,7 +74,11 @@
     "string": "c",
     "string.h": "c",
     "stddef.h": "c",
-    "cs3050.h": "c"
+    "cs3050.h": "c",
+    "BFST.C": "cpp",
+    "DFST.C": "cpp",
+    "mucsgraph.h": "c",
+    "queue.h": "c"
   },
   "lldb.displayFormat": "auto",
   "lldb.showDisassembly": "auto",

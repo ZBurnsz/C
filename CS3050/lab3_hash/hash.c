@@ -124,7 +124,7 @@ void FreeChainTable(void *hashtable) {
         i++; 
     }
     free(table); 
- 
+
 }
 
 // Inserts an element into the table 
@@ -137,10 +137,18 @@ int InsertChain(void *hashtable, int elementSize, int elementCountMax, int key, 
     Chain **table = (Chain **)hashtable;
 
     Chain *newNode = malloc(sizeof(Chain));
+    if (!newNode){ 
+        return -1; 
+    }
 
     newNode->key = key; 
 
-    newNode->element = malloc(elementSize); 
+    newNode->element = malloc(elementSize);
+
+    if (!newNode->element){ 
+        free(newNode); 
+        return -1; 
+    }
 
     memcpy(newNode->element, element, elementSize);
 

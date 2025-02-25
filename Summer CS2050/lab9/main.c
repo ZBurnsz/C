@@ -13,7 +13,7 @@ July 11, 2024
 void printComputerArray(Computer *array, int size) {
     for (int i = 0; i < size; i++) {
         printf("Computer %d: Disk Size = %d, Company = %s, Model = %s\n", 
-               i, array[i].iDisk, array[i].sCompany, array[i].sModel);
+               i, (int)array[i].iDisk, array[i].sCompany, array[i].sModel);
     }
 }
 

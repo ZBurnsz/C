@@ -6,19 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "stopAtEntry": false,
-      "externalConsole": true,
-      "cwd": "c:/Users/Zach/OneDrive/Documents/GitHub/C/CS3050/lab5",
-      "program": "c:/Users/Zach/OneDrive/Documents/GitHub/C/CS3050/lab5/build/Debug",
-      "MIMode": "gdb",
-      "miDebuggerPath": "gdb",
-      "setupCommands": [
-        {
-          "description": "Enable pretty-printing for gdb",
-          "text": "-enable-pretty-printing",
-          "ignoreFailures": true
-        }
-      ]
+      "cwd": "/Users/zacharyburns/Documents/GitHub/C/Personal/chatgptmessaround",
+      "program": "/Users/zacharyburns/Documents/GitHub/C/Personal/chatgptmessaround/build/Debug/outDebug"
     },
     {
       "name": "C/C++: gcc.exe build and debug active file",
